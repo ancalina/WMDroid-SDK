@@ -182,6 +182,7 @@ def main():
                               ('](NOTICE)', '](sdk/NOTICE)')):
             text = text.replace(before, after)
         source_entries[name] = text.encode('utf-8')
+    source_entries['.github/workflows/docs.yml'] = (SDK / 'docs-pages.yml').read_bytes()
     source_entries.update(documentation_sources())
     for name in SDK_CHECK_FILES:
         path = ROOT / name
