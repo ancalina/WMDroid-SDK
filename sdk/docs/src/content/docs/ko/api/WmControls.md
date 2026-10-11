@@ -90,7 +90,7 @@ public static void textStyle(TextView view,Typeface font);
 
 font를 적용하고 [WmFonts.attach](/ko/api/wmfonts/)로 등록한다. 등록된 bold 역할은 font.isBold()로 결정하며 null font는 regular 역할이다. 크기는 `WmMetrics.FONT` 픽셀, gravity는 CENTER_VERTICAL, includeFontPadding=false, line spacing은 0/1이다. 일반 문구는 검정, disabled는 SHADOW이며 기본 터치음은 끈다.
 
-API ≤15에서는 EditText가 아닌 non-Spannable 문구를 SPANNABLE buffer로 바꾼다. API ≥21은 font feature "kern", API ≥23은 break strategy 0을 설정한다. minimum size·padding·tint·기존 input/check/button/entry/tab 역할은 초기화하지 않는다.
+API ≤15에서는 EditText가 아닌 non-Spannable 문구를 SPANNABLE buffer로 바꾼다. API ≥21은 font feature "kern", API ≥23은 break strategy 0을 설정한다. API ≥26은 Android 기본 focus highlight overlay를 끄며 SDK가 그리는 focus 표시는 유지한다. minimum size·padding·tint·기존 input/check/button/entry/tab 역할은 초기화하지 않는다.
 
 ### input
 
@@ -107,6 +107,18 @@ public static void check(CheckBox view,Typeface font);
 ```
 
 [textStyle](#textstyle) 후 check 역할과 SDK 체크 표시를 적용한다. indicator의 intrinsic 크기는 `WmMetrics.INDICATOR`; checked 상태는 유지한다. 배경을 투명으로 바꾸고 padding/minimum size를 초기화한 뒤 indicator와 문구 사이 간격을 확보한다. 간격은 `WmMetrics.EDGE+round(measure("0"))/2`의 정수 계산이며 기존 compound padding의 부족분만 추가한다. API ≥21은 button tint를 해제한다. listener는 유지한다.
+
+### listCheck
+
+```java
+public static void listCheck(CheckBox view,Typeface font);
+```
+
+[textStyle](#textstyle) 후 두 상태의 목록 indicator를 적용한다. intrinsic cell은 32×32 논리 픽셀이고 검정/흰색 glyph는 28×28이며 각 변에 2픽셀 여백이 있다. 일반 [check](#check)는 30×30 indicator(`WmMetrics.INDICATOR`)를 사용한다.
+
+checked 상태와 listener는 유지한다. 배경을 투명으로 바꾸고 padding/minimum size를 초기화한 뒤 32픽셀 예약에 필요한 compound padding의 부족분만 추가한다. font에서 계산한 문구 간격은 추가하지 않으며 restyle에서도 같다. API ≥21은 button/background tint와 state list animator를 해제한다.
+
+checked만 indicator 이미지를 바꾼다. enabled/pressed/focused 상태는 검정/흰색 그림을 바꾸지 않는다. disabled 문구는 textStyle을 따르며 클릭 동작은 Android CheckBox를 따른다. enabled 상태·행 높이·LayoutParams는 바꾸지 않는다.
 
 ### radio
 

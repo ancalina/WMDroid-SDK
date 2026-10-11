@@ -40,6 +40,16 @@ public final class WmPhoneView extends LinearLayout implements WmControls.Restyl
             public void speedDial(){listener.speedDial();}public void history(){listener.history();}public void talk(){if(!number.isEmpty())listener.dial(number);}
         });addView(keypad,new LayoutParams(-1,WmPhoneKeypad.HEIGHT));onWmRestyle(regular,bold,selection,WmPalette.face(selection));onWmLanguageChanged(language);
     }
+    @Override protected void onMeasure(int widthSpec,int heightSpec){
+        int height=WmPhoneKeypad.HEIGHT;
+        if(MeasureSpec.getMode(heightSpec)!=MeasureSpec.UNSPECIFIED){
+            int reserved=getPaddingTop()+getPaddingBottom()+getChildAt(0).getLayoutParams().height+suggestion.getLayoutParams().height;
+            height=Math.min(height,Math.max(0,MeasureSpec.getSize(heightSpec)-reserved));
+        }
+        // Pass the remaining height to the keypad's uniform fit instead of clipping its last row.
+        keypad.getLayoutParams().height=height;
+        super.onMeasure(widthSpec,heightSpec);
+    }
     /** Formatting separators are accepted; URI payloads, letters and multiline values are not. */
     public static String dialable(String value){
         if(value==null||value.length()>256)throw new IllegalArgumentException("Invalid phone number");StringBuilder out=new StringBuilder();

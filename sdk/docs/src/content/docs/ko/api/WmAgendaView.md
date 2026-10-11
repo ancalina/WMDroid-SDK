@@ -64,6 +64,10 @@ public boolean selectEvent(Event event);
 
 마지막 `setEvents`에 등록된 Event 인스턴스를 선택한다. null은 선택을 지우고 true, 미등록 인스턴스는 상태 변경 없이 false를 반환한다. 성공하면 행 터치를 취소하고 callback 없이 다시 그린다. null이 아닌 선택은 해당 목록에 초점을 요청하고 행이 보이도록 스크롤한다. 행이 viewport보다 크면 행 상단에 맞추며 실제 위치는 viewport 범위로 제한된다. 시간 일정은 strip phase도 선택하며 부착되고 strip 너비가 양수일 때만 pan을 시작한다. 선택 해제는 기존 strip pan을 중지하지 않는다.
 
+내부 행 목록에 초점이 있고 목록과 agenda가 모두 enabled이면 UP/DOWN으로 그 목록 안에서 선택을 이동한다. 마지막 종일 행에서 DOWN은 첫 시간 행으로, 첫 시간 행에서 UP은 마지막 종일 행으로 이동한다. 초점 목록 안에 선택된 Event가 없으면 두 키 모두 그 목록의 첫 행을 선택한다. 빈 목록은 선택 변경 없이 키를 소비한다.
+
+새 누름(`KeyEvent.getRepeatCount()==0`)은 전체 마지막 행에서 첫 행으로, 첫 행에서 마지막 행으로 순환한다. 한 partition만 있으면 행이 둘 이상일 때 그 안에서 순환한다. 반복 key-down은 내부 이동과 중간 경계 이동을 허용하지만 전체 양끝 순환은 억제한다. 이는 SDK의 Android repeat 정책이며 원본 raw `0x4000` flag와의 대응은 미검증이다. enabled 상태의 UP/DOWN key-up은 추가 이동 없이 소비한다. 키 선택은 `selectEvent`를 사용하며 listener callback을 호출하거나 약속을 열지 않는다.
+
 ### setDate
 
 ```java

@@ -35,7 +35,7 @@ public final class WmControls {
     // Values never retain their view: detached controls can be collected normally.
     private static final WeakHashMap<View,Style> STYLES=new WeakHashMap<>();
     private static final class Style {
-        boolean text,bold,locked,input,check,entry,tab,button,entryBackground,faceBackground,defaultButton;
+        boolean text,bold,locked,input,check,listCheck,entry,tab,button,entryBackground,faceBackground,defaultButton;
         String authoredText,textKey,authoredDescription,authoredHint;
         Object[] formatValues;
         int indicatorGap,indicatorColor=0xff37c7d3,buttonSelection=DEFAULT_SELECTION;
@@ -189,6 +189,7 @@ public final class WmControls {
     public static TextView text(Context context,Typeface font,CharSequence value){TextView view=new TextView(context);textStyle(view,font);view.setText(value);return view;}
     public static void textStyle(TextView view,Typeface font){
         view.setSoundEffectsEnabled(false);
+        if(Build.VERSION.SDK_INT>=26)view.setDefaultFocusHighlightEnabled(false);
         Style state=style(view);state.text=true;state.bold=font!=null&&font.isBold();
         // ICS BoringLayout reuses metrics without clearing earlier larger font extents.
         if(Build.VERSION.SDK_INT<=15&&!(view instanceof EditText)&&!(view.getText() instanceof android.text.Spannable))view.setText(view.getText(),TextView.BufferType.SPANNABLE);
@@ -204,14 +205,22 @@ public final class WmControls {
         view.setPadding(4,2,4,2);clearMinimums(view);
     }
     public static void check(CheckBox view,Typeface font){
-        textStyle(view,font);style(view).check=true;view.setButtonDrawable(new CheckMark());
+        check(view,font,false);
+    }
+    /** Fixed 32-pixel list state image, without standalone checkbox focus or gap. */
+    public static void listCheck(CheckBox view,Typeface font){
+        check(view,font,true);
+    }
+    private static void check(CheckBox view,Typeface font,boolean listStyle){
+        textStyle(view,font);Style state=style(view);state.check=true;state.listCheck=listStyle;view.setButtonDrawable(new CheckMark(listStyle));
         if(Build.VERSION.SDK_INT>=21)view.setButtonTintList(null);
+        if(listStyle&&Build.VERSION.SDK_INT>=21){view.setBackgroundTintList(null);view.setStateListAnimator(null);}
         view.setBackgroundColor(Color.TRANSPARENT);view.setPadding(0,0,0,0);clearMinimums(view);view.setSoundEffectsEnabled(false);
         reserveIndicator(view);
     }
     /** Classic radio selection, without platform tint, ripple or animations. */
     public static void radio(android.widget.RadioButton view,Typeface font){
-        textStyle(view,font);style(view).check=true;view.setButtonDrawable(new RadioMark());
+        textStyle(view,font);style(view).check=true;style(view).listCheck=false;view.setButtonDrawable(new RadioMark());
         if(Build.VERSION.SDK_INT>=21){view.setButtonTintList(null);view.setBackgroundTintList(null);view.setStateListAnimator(null);}
         view.setBackgroundColor(Color.TRANSPARENT);view.setPadding(0,0,0,0);clearMinimums(view);view.setSoundEffectsEnabled(false);
         reserveIndicator(view);
@@ -220,11 +229,13 @@ public final class WmControls {
     // newer ones add its width in getCompoundPaddingLeft(). Fill only the deficit.
     private static int indicatorGap(TextView view){return WmMetrics.EDGE+Math.round(WmFonts.measure(view.getPaint(),"0"))/2;}
     private static void reserveIndicator(android.widget.CompoundButton view){
-        int gap=indicatorGap(view),missing=Math.max(0,WmMetrics.INDICATOR+gap-view.getCompoundPaddingLeft());
+        int gap=style(view).listCheck?0:indicatorGap(view),width=style(view).listCheck?32:WmMetrics.INDICATOR;
+        int missing=Math.max(0,width+gap-view.getCompoundPaddingLeft());
         if(missing>0)view.setPadding(view.getPaddingLeft()+missing,view.getPaddingTop(),view.getPaddingRight(),view.getPaddingBottom());
         style(view).indicatorGap=gap;
     }
     private static void restyleIndicator(android.widget.CompoundButton view,int selection){
+        if(style(view).listCheck)return;
         Style state=style(view);int gap=indicatorGap(view),delta=gap-state.indicatorGap;
         if(delta!=0)view.setPadding(Math.max(0,view.getPaddingLeft()+delta),view.getPaddingTop(),view.getPaddingRight(),view.getPaddingBottom());
         state.indicatorGap=gap;
@@ -371,6 +382,17 @@ public final class WmControls {
         @Override public int getOpacity(){return PixelFormat.TRANSLUCENT;}
     }
     private static final class CheckMark extends Drawable {
+        private final boolean listStyle;
+        private final android.graphics.Path listTick;
+        private CheckMark(){this(false);}
+        private CheckMark(boolean listStyle){this.listStyle=listStyle;listTick=listStyle?listTick():null;}
+        private static android.graphics.Path listTick(){
+            // Native DrawFrameControl: 16-pixel inner rect, integer PATCOPY bands.
+            android.graphics.Path path=new android.graphics.Path();
+            for(int x=8;x<=11;x++){int y=15+x-8;path.addRect(x,y,x+1,y+6,android.graphics.Path.Direction.CW);}
+            for(int x=12;x<=22;x++){int y=19-(x-12);path.addRect(x,y,x+1,y+6,android.graphics.Path.Direction.CW);}
+            return path;
+        }
         // Actual stock Button bitmap4 row2; parent brush remains visible when inactive/pressed.
         private static final int[] TICK={22,8,24,9,21,9,24,10,20,10,24,11,19,11,24,12,6,12,8,13,18,12,24,13,6,13,9,14,17,13,24,14,6,14,10,15,16,14,23,15,6,15,11,16,15,15,22,16,6,16,12,17,14,16,21,17,6,17,20,18,7,18,19,19,8,19,18,20,9,20,17,21,10,21,16,22,11,22,15,23,12,23,14,24};
         private static final int[] MIXED_OUTLINE={22,8,24,9,21,9,24,10,20,10,22,11,23,10,24,11,19,11,21,12,23,11,24,12,6,12,8,13,18,12,20,13,23,12,24,13,6,13,9,14,17,13,19,14,22,13,24,14,6,14,7,15,8,14,10,15,16,14,18,15,21,14,23,15,6,15,7,16,9,15,11,16,15,15,17,16,20,15,22,16,6,16,7,17,10,16,12,17,14,16,16,17,19,16,21,17,6,17,8,18,11,17,15,18,18,17,20,18,7,18,9,19,12,18,14,19,17,18,19,19,8,19,10,20,16,19,18,20,9,20,11,21,15,20,17,21,10,21,12,22,14,21,16,22,11,22,15,23,12,23,14,24};
@@ -382,9 +404,19 @@ public final class WmControls {
         @Override public boolean isStateful(){return true;}
         @Override protected boolean onStateChange(int[] states){
             boolean c=false,e=false,p=false,f=false;if(states!=null)for(int state:states){if(state==android.R.attr.state_checked)c=true;else if(state==android.R.attr.state_enabled)e=true;else if(state==android.R.attr.state_pressed)p=true;else if(state==android.R.attr.state_focused)f=true;}
+            if(listStyle){if(c==checked)return false;checked=c;invalidateSelf();return true;}
             if(c==checked&&e==enabled&&p==pressed&&f==focused)return false;checked=c;enabled=e;pressed=p;focused=f;invalidateSelf();return true;
         }
         @Override public void draw(Canvas canvas){
+            if(listStyle){
+                if(getBounds().isEmpty())return;int saved=canvas.save();canvas.translate(getBounds().left,getBounds().top);canvas.scale(getBounds().width()/32f,getBounds().height()/32f);
+                paint.setStyle(Paint.Style.FILL);paint.setColor(Color.BLACK);paint.setAlpha(alpha);canvas.drawRect(2,2,30,30,paint);
+                paint.setColor(Color.WHITE);paint.setAlpha(alpha);canvas.drawRect(4,4,28,28,paint);
+                if(checked){
+                    paint.setColor(Color.BLACK);paint.setAlpha(alpha);canvas.drawPath(listTick,paint);
+                }
+                canvas.restoreToCount(saved);return;
+            }
             if(getBounds().isEmpty())return;int saved=canvas.save();canvas.translate(getBounds().left,getBounds().top);canvas.scale(getBounds().width()/30f,getBounds().height()/30f);
             paint.setStyle(Paint.Style.FILL);paint.setColor(Color.BLACK);paint.setAlpha(alpha);canvas.drawPath(border,paint);
             if(enabled&&!pressed){paint.setColor(Color.WHITE);paint.setAlpha(alpha);canvas.drawRect(2,2,28,28,paint);}
@@ -394,7 +426,7 @@ public final class WmControls {
             if(focused)indicatorFocus(canvas,this,paint,alpha,focus);
             canvas.restoreToCount(saved);if(focused)captionFocus(canvas,this,paint,alpha);
         }
-        @Override public int getIntrinsicWidth(){return WmMetrics.INDICATOR;}@Override public int getIntrinsicHeight(){return WmMetrics.INDICATOR;}
+        @Override public int getIntrinsicWidth(){return listStyle?32:WmMetrics.INDICATOR;}@Override public int getIntrinsicHeight(){return listStyle?32:WmMetrics.INDICATOR;}
         @Override public void setAlpha(int value){alpha=Math.max(0,Math.min(255,value));invalidateSelf();}
         @Override public void setColorFilter(ColorFilter filter){paint.setColorFilter(filter);invalidateSelf();}
         @Override public int getOpacity(){return PixelFormat.TRANSLUCENT;}

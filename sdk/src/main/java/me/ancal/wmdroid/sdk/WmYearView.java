@@ -52,7 +52,7 @@ public final class WmYearView extends View implements WmControls.RestyleListener
         bitmapPaint.setFilterBitmap(false);inverted.setFilterBitmap(false);
         inverted.setColorFilter(new ColorMatrixColorFilter(new float[]{-1,0,0,0,255,0,-1,0,0,255,0,0,-1,0,255,0,0,0,1,0}));
         Calendar now=Calendar.getInstance();setDate(now.get(Calendar.YEAR),now.get(Calendar.MONTH)+1,now.get(Calendar.DAY_OF_MONTH));
-        setFocusable(true);setClickable(true);setSoundEffectsEnabled(false);
+        setFocusableInTouchMode(true);setClickable(true);setSoundEffectsEnabled(false);
     }
     private void refreshArtwork(){
         if(artworkRevision==null)try{WmResources.prepare(getContext());}catch(IOException unavailable){}
@@ -215,7 +215,7 @@ public final class WmYearView extends View implements WmControls.RestyleListener
      * candidate synchronously without recomputing its coordinates or stored date.
      * Cancellation/multi-touch clears it without notification. */
     @Override public boolean onTouchEvent(MotionEvent event){
-        int action=event.getActionMasked();if(action==MotionEvent.ACTION_DOWN){cancelGesture();tracking=true;if(getParent()!=null)getParent().requestDisallowInterceptTouchEvent(true);updateCandidate(event.getX(),event.getY());return true;}
+        int action=event.getActionMasked();if(action==MotionEvent.ACTION_DOWN){if(isEnabled())requestFocus();cancelGesture();tracking=true;if(getParent()!=null)getParent().requestDisallowInterceptTouchEvent(true);updateCandidate(event.getX(),event.getY());return true;}
         if(!tracking)return false;
         if(action==MotionEvent.ACTION_CANCEL||action==MotionEvent.ACTION_POINTER_DOWN||event.getPointerCount()>1){cancelGesture();return true;}
         if(action==MotionEvent.ACTION_MOVE){updateCandidate(event.getX(),event.getY());return true;}

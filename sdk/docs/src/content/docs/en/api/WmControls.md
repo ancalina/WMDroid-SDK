@@ -90,7 +90,7 @@ public static void textStyle(TextView view,Typeface font);
 
 Applies font and registers it with [WmFonts.attach](/en/api/wmfonts/). Records the bold role from font.isBold(); null font records the regular role. Uses `WmMetrics.FONT` pixels, CENTER_VERTICAL gravity, no font padding, and line spacing 0/1. Text is black or SHADOW when disabled; disables platform touch sounds.
 
-On API ≤15, converts non-Spannable text outside EditText to a SPANNABLE buffer. API ≥21 sets font feature "kern"; API ≥23 sets break strategy 0. Does not reset minimum sizes, padding, tint, or earlier input/check/button/entry/tab roles.
+On API ≤15, converts non-Spannable text outside EditText to a SPANNABLE buffer. API ≥21 sets font feature "kern"; API ≥23 sets break strategy 0. API ≥26 disables Android’s default focus highlight overlay; SDK-drawn focus indicators remain. Does not reset minimum sizes, padding, tint, or earlier input/check/button/entry/tab roles.
 
 ### input
 
@@ -107,6 +107,18 @@ public static void check(CheckBox view,Typeface font);
 ```
 
 Applies [textStyle](#textstyle), records the check role, and installs the SDK check indicator with intrinsic size `WmMetrics.INDICATOR`. Retains checked state/listeners. Sets a transparent background, resets padding/minimum sizes, then reserves indicator-caption spacing. The gap is integer `WmMetrics.EDGE+round(measure("0"))/2`; adds only the deficit in existing compound padding. API ≥21 clears button tint.
+
+### listCheck
+
+```java
+public static void listCheck(CheckBox view,Typeface font);
+```
+
+Applies [textStyle](#textstyle) with a two-state list indicator. Its intrinsic cell is 32×32 logical pixels; the 28×28 black/white glyph has a 2-pixel margin on each side. Ordinary [check](#check) uses a 30×30 indicator (`WmMetrics.INDICATOR`).
+
+Retains checked state/listeners. Sets a transparent background, resets padding/minimum sizes, then adds only the compound-padding deficit needed to reserve 32 pixels. Adds no font-derived caption gap, including during restyling. API ≥21 clears button/background tint and the state-list animator.
+
+Only checked changes the indicator image; enabled/pressed/focused states do not change its black/white drawing. Disabled captions follow textStyle; click behavior follows Android CheckBox. Does not change enabled state, row height, or LayoutParams.
 
 ### radio
 

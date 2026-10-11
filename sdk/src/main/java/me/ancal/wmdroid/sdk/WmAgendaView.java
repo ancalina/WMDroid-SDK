@@ -16,6 +16,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.view.MotionEvent;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.LinearLayout;
@@ -359,6 +360,23 @@ public final class WmAgendaView extends LinearLayout implements WmControls.Resty
         private Event hit(float x,float y){if(x<0||x>=getWidth()||y<0||y>=getHeight())return null;int index=(int)y/spacing();return index<records().size()?records().get(index):null;}
         void cancelGesture(){tracking=false;downEvent=null;setPressed(false);invalidate();}
         @Override protected void onFocusChanged(boolean gain,int direction,Rect previous){super.onFocusChanged(gain,direction,previous);if(strip!=null)strip.invalidate();}
+        @Override public boolean onKeyDown(int keyCode,KeyEvent event){
+            if(!isEnabled()||!WmAgendaView.this.isEnabled()||(keyCode!=KeyEvent.KEYCODE_DPAD_UP&&keyCode!=KeyEvent.KEYCODE_DPAD_DOWN))return super.onKeyDown(keyCode,event);
+            List<Event> values=records();if(values.isEmpty())return true;
+            int index=values.indexOf(selected),direction=keyCode==KeyEvent.KEYCODE_DPAD_DOWN?1:-1;
+            if(index<0){selectEvent(values.get(0));return true;}
+            int next=index+direction;
+            if(next>=0&&next<values.size()){selectEvent(values.get(next));return true;}
+            List<Event> other=allDay?timedEvents:allDayEvents;
+            // Cross the middle boundary while held; require a fresh press to wrap the whole list.
+            if(!other.isEmpty()&&(allDay&&direction>0||!allDay&&direction<0||event.getRepeatCount()==0))selectEvent(other.get(direction>0?0:other.size()-1));
+            else if(other.isEmpty()&&values.size()>1&&event.getRepeatCount()==0)selectEvent(values.get(direction>0?0:values.size()-1));
+            return true;
+        }
+        @Override public boolean onKeyUp(int keyCode,KeyEvent event){
+            if(isEnabled()&&WmAgendaView.this.isEnabled()&&(keyCode==KeyEvent.KEYCODE_DPAD_UP||keyCode==KeyEvent.KEYCODE_DPAD_DOWN))return true;
+            return super.onKeyUp(keyCode,event);
+        }
         @Override public boolean onTouchEvent(MotionEvent event){
             int action=event.getActionMasked();if(action==MotionEvent.ACTION_DOWN){cancelGesture();if(event.getPointerCount()!=1)return false;downX=event.getX();downY=event.getY();downEvent=hit(downX,downY);tracking=downEvent!=null;if(tracking)requestFocus();if(tracking&&!allDay){selectStripPhase(downEvent);startStripPan();}invalidate();return tracking;}
             if(!tracking)return false;

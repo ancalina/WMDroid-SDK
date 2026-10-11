@@ -202,6 +202,8 @@ Returns a new date array for View coordinates or null for dead space. Split date
 public boolean onTouchEvent(MotionEvent event);
 ```
 
+When enabled, DOWN requests keyboard focus, including in dead space. The view is focusable in touch mode by default.
+
 DOWN/MOVE updates the date candidate and enlarged bubble; moving to dead space clears it. UP synchronously calls choose only if the last DOWN/MOVE candidate remains, without recalculating UP coordinates. Cancellation/multi-touch clears it without notification. Stored date() is unchanged; the owner applies a confirmed date with setDate.
 
 ### performClick

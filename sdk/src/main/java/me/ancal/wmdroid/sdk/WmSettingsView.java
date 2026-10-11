@@ -161,6 +161,7 @@ public class WmSettingsView extends LinearLayout implements WmControls.RestyleLi
             Item[] items=categories[group].items;cells=new LinearLayout[items.length];
             for(int i=0;i<items.length;i++){
                 Item item=items[i];LinearLayout cell=new LinearLayout(getContext());cells[i]=cell;
+                if(android.os.Build.VERSION.SDK_INT>=26)cell.setDefaultFocusHighlightEnabled(false);
                 cell.setOrientation(VERTICAL);cell.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL);cell.setPadding(0,ICON_TOP,0,0);
                 cell.setTag("setting:"+item.key);WmControls.bindDescription(cell,language,item.authoredCaption);
                 ImageView image=new ImageView(getContext());image.setTag("setting-icon:"+item.key);image.setImageDrawable(item.icon);image.setScaleType(ImageView.ScaleType.FIT_CENTER);cell.addView(image,new LayoutParams(64,64));
@@ -168,6 +169,7 @@ public class WmSettingsView extends LinearLayout implements WmControls.RestyleLi
                 int height=Math.max(136,CAPTION_TOP+2*caption.getLineHeight());
                 LayoutParams captionLayout=new LayoutParams(LayoutParams.MATCH_PARENT,height-CAPTION_TOP);captionLayout.leftMargin=WmMetrics.EDGE;captionLayout.rightMargin=WmMetrics.EDGE;captionLayout.topMargin=CAPTION_TOP-ICON_TOP-64;cell.addView(caption,captionLayout);
                 cell.setLayoutParams(new LayoutParams(150,height));
+                cell.setOnFocusChangeListener((v,focused)->v.setActivated(focused&&!v.isInTouchMode()));
                 cell.setSoundEffectsEnabled(false);cell.setOnClickListener(v->open.open(item.key));
             }
             sortCells();

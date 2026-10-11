@@ -75,7 +75,7 @@ public final class WmPropertySheet extends LinearLayout implements WmControls.Ba
         if(event.getAction()!=KeyEvent.ACTION_DOWN)return super.dispatchKeyEvent(event);
         // commctrl329F4AC: ordinary property sheets wrap before dialog dispatch.
         int direction=key==KeyEvent.KEYCODE_PAGE_UP||key==KeyEvent.KEYCODE_TAB&&event.isShiftPressed()?-1:1;
-        trySelectPage((selected+direction+pages.size())%pages.size());
+        trySelectPage((selected+direction+pages.size())%pages.size(),true);
         return true;
     }
     /** Lifecycle restoration only: validates the index, without page notifications/listeners. */
@@ -83,8 +83,11 @@ public final class WmPropertySheet extends LinearLayout implements WmControls.Ba
     /** Notifications precede the UI commit. Pages remain eagerly attached; this is
      * not the complete native property-sheet message loop or lazy dialog creation. */
     public boolean trySelectPage(int index){
+        return trySelectPage(index,false);
+    }
+    private boolean trySelectPage(int index,boolean reactivate){
         if(notifying)return false;
-        checkIndex(index);if(index==selected)return true;
+        checkIndex(index);if(index==selected&&!reactivate)return true;
         OnPageNotificationListener snapshot=notifications;
         int approved;boolean changed;
         notifying=true;
@@ -93,7 +96,7 @@ public final class WmPropertySheet extends LinearLayout implements WmControls.Ba
             boolean tabFocus=strip.hasFocus();
             approved=resolvePage(index,snapshot);
             if(approved<0)return false;
-            changed=activatePage(approved,tabFocus);
+            changed=activatePage(approved,tabFocus,reactivate);
         }finally{notifying=false;}
         // Preserve existing post-commit reentrant selection from app callbacks.
         if(changed&&listener!=null)listener.selected(approved);
@@ -118,9 +121,9 @@ public final class WmPropertySheet extends LinearLayout implements WmControls.Ba
         if(approved<0||approved==selected)return false;
         selected=approved;refreshPages();return true;
     }
-    private boolean activatePage(int approved,boolean tabFocus){
+    private boolean activatePage(int approved,boolean tabFocus,boolean reactivate){
         boolean changed=commitPage(approved);
-        if(changed&&getWindowToken()!=null){
+        if(approved>=0&&(changed||reactivate)&&getWindowToken()!=null){
             // commctrl329E894/329E768: activation owns focus, before app callbacks.
             // ponytail: Android forward traversal substitutes GetNextDlgTabItem;
             // replace when exact HWND dialog order is available.
@@ -153,21 +156,21 @@ public final class WmPropertySheet extends LinearLayout implements WmControls.Ba
         try{
             int gate=applying?PSN_KILLACTIVE:PSN_QUERYCANCEL;
             if(snapshot!=null&&snapshot.notifyPage(selected,gate)!=0)return false;
-            boolean tabFocus=strip.hasFocus();
+            boolean tabFocus=false;
             int notification=applying?PSN_APPLY:PSN_RESET;
             for(int index=0;index<pages.size();index++){
                 int result=snapshot==null?0:snapshot.notifyPage(index,notification,closing?1:0);
                 if(result!=PSNRET_NOERROR){
                     success=false;
-                    if(result!=PSNRET_INVALID_NOCHANGEPAGE)approved=resolvePage(index,snapshot);
+                    if(result!=PSNRET_INVALID_NOCHANGEPAGE){tabFocus=strip.hasFocus();approved=resolvePage(index,snapshot);}
                     break;
                 }
                 // Native partial apply/reset: prior successful pages stay clean
                 // even if a later page vetoes or throws. No rollback is implied.
                 changedPages.set(index,false);
             }
-            if(success&&applying&&!closing){approved=resolvePage(selected,snapshot);if(approved<0)success=false;}
-            changed=activatePage(approved,tabFocus);
+            if(success&&applying&&!closing){tabFocus=strip.hasFocus();approved=resolvePage(selected,snapshot);if(approved<0)success=false;}
+            changed=activatePage(approved,tabFocus,true);
         }finally{notifying=false;}
         if(changed&&listener!=null)listener.selected(approved);
         return success;

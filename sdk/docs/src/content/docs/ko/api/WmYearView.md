@@ -202,6 +202,8 @@ View 좌표의 새 `[year,month,day]` 또는 빈 영역이면 null. 작은 달�
 public boolean onTouchEvent(MotionEvent event);
 ```
 
+활성 상태의 DOWN에서 키보드 포커스를 요청한다. 빈 영역도 포함한다. 기본적으로 터치 모드에서도 포커스를 받을 수 있다.
+
 DOWN/MOVE에서 날짜 후보·확대 말풍선을 갱신하며 빈 영역으로 이동하면 후보를 지웁니다. UP은 마지막 DOWN/MOVE의 후보가 남아 있을 때만 choose를 동기로 호출하며 UP 좌표를 다시 계산하지 않습니다. 취소·다중 터치는 후보를 지우고 통지하지 않습니다. 저장된 date()는 바꾸지 않으므로 확정 날짜는 소유자가 setDate로 반영합니다.
 
 ### performClick

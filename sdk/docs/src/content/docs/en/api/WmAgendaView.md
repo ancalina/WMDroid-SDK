@@ -64,6 +64,10 @@ public boolean selectEvent(Event event);
 
 Selects an Event instance retained by the latest `setEvents`. Null clears selection and returns true. An unregistered instance returns false without changing state. Successful calls cancel row gestures and redraw without callbacks. Non-null selection requests focus on its list and scrolls the row into view; if the row is taller than the viewport, it aligns the row top. Actual scroll position remains viewport-limited. Timed selection also chooses a strip phase and starts panning only when attached with a positive strip width. Clearing selection does not stop an existing strip pan.
 
+When an internal row list has focus and both it and the agenda are enabled, UP/DOWN moves selection within that list. DOWN from the last all-day row enters the first timed row; UP from the first timed row enters the last all-day row. With no selected Event in the focused list, either key selects its first row. An empty list consumes the key without changing selection.
+
+A fresh press (`KeyEvent.getRepeatCount()==0`) wraps from the combined last row to the first, or first to last; a single nonempty partition also wraps when it has at least two rows. Repeated key-downs allow interior and middle-boundary moves but suppress these outer wraps. This is the SDK's Android repeat policy; equivalence to the native raw `0x4000` flag is unverified. Enabled UP/DOWN key-up is consumed without another move. Key selection uses `selectEvent`, without listener callbacks or opening appointments.
+
 ### setDate
 
 ```java
