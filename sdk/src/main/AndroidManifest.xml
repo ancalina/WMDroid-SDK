@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="me.ancal.wmdroid.sdk">
+ <uses-sdk android:minSdkVersion="14" />
+ <uses-permission android:name="android.permission.INTERNET" />
+ <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+ <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+ <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+ <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+ <queries><intent><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.LAUNCHER" /></intent><package android:name="me.ancal.wmdroid" /><provider android:authorities="me.ancal.wmdroid.shell" /></queries>
+ <application />
+</manifest>

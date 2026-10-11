@@ -1,0 +1,10 @@
+/* API signatures retain their spacing; tables scroll on narrow screens. */
+:root { --sl-content-width: 58rem; }
+.sl-markdown-content :is(pre, table) { max-width: 100%; overflow-x: auto; }
+.sl-markdown-content pre { tab-size: 4; }
+.sl-markdown-content img { height: auto; max-width: 100%; }
+
+/* Keep role groups visible; reveal methods for the active or focused group. */
+starlight-toc nav > ul > li > ul { display: none; }
+starlight-toc nav > ul > li:has(a[aria-current="true"]) > ul,
+starlight-toc nav > ul > li:focus-within > ul { display: block; }

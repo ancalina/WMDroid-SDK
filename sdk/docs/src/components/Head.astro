@@ -1,0 +1,13 @@
+---
+import Head from '@astrojs/starlight/components/Head.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+const path = Astro.url.pathname.slice(base.length).replace(/^\/+|\/+$/g, '');
+const english = path === '404' || path === '404.html'
+  ? '404' : path.replace(/^ko(?=\/|$)/, 'en') || 'en';
+const record = english;
+const contractUrl = `${base}llm/${record}.txt`;
+---
+<Head />
+<meta name="llm-contract" content={contractUrl} />
+<link rel="alternate" type="text/plain" hreflang="en" title="English compact contract" href={contractUrl} />
+<link rel="alternate" type="text/plain" title="Documentation contract index" href={`${base}llms.txt`} />

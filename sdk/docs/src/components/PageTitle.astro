@@ -1,0 +1,35 @@
+---
+import PageTitle from '@astrojs/starlight/components/PageTitle.astro';
+const route = Astro.locals.starlightRoute;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+function currentPath(entries, parents = []) {
+  for (const entry of entries) {
+    if (entry.type === 'link' && entry.isCurrent) return [...parents, entry.label];
+    if (entry.type === 'group') {
+      const path = currentPath(entry.entries, [...parents, entry.label]);
+      if (path) return path;
+    }
+  }
+}
+const path = currentPath(route.sidebar);
+const isApi = route.id.startsWith(`${route.locale}/api/`);
+const ko = route.lang === 'ko';
+---
+{isApi && path && path.length === 3 && (
+  <nav data-pagefind-ignore aria-label={ko ? '현재 위치' : 'Breadcrumb'} class="api-path">
+    <ol>
+      <li><a href={`${base}${route.locale}/api/`}>{path[0]}</a></li>
+      <li>{path[1]}</li>
+      <li aria-current="page">{path[2]}</li>
+    </ol>
+  </nav>
+)}
+{isApi && path && path.length === 3 && (
+  <span hidden data-pagefind-meta="title">{`${path[2]} · ${path[1]} · ${ko ? '한국어' : 'English'}`}</span>
+)}
+<div data-pagefind-ignore><PageTitle /></div>
+<style>
+  .api-path { font-size: var(--sl-text-sm); color: var(--sl-color-gray-2); }
+  ol { display: flex; flex-wrap: wrap; gap: .4rem; list-style: none; padding: 0; margin: 0; }
+  li + li::before { content: '›'; margin-inline-end: .4rem; }
+</style>
