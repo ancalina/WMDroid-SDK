@@ -172,7 +172,16 @@ def main():
     source_entries.update({'sdk/src/main/assets/' + name: data for name, data in font_assets().items()})
     source_entries['sdk/src/main/AndroidManifest.xml'] = MANIFEST
     source_entries.update({path.relative_to(ROOT).as_posix(): path.read_bytes() for path in sorted((SDK / 'templates').rglob('*')) if path.is_file()})
-    source_entries['sdk/README.md'] = (SDK / 'README.md').read_bytes()
+    for name in ('README.md', 'README.ko.md'):
+        text = (SDK / name).read_text(encoding='utf-8')
+        source_entries['sdk/' + name] = text.encode('utf-8')
+        for before, after in (('](docs/', '](sdk/docs/'),
+                              ('](../DEPENDENCIES.md)', '](DEPENDENCIES.md)'),
+                              ('](../LICENSES.md)', '](LICENSES.md)'),
+                              ('](LICENSE)', '](sdk/LICENSE)'),
+                              ('](NOTICE)', '](sdk/NOTICE)')):
+            text = text.replace(before, after)
+        source_entries[name] = text.encode('utf-8')
     source_entries.update(documentation_sources())
     for name in SDK_CHECK_FILES:
         path = ROOT / name
