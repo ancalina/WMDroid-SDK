@@ -8,7 +8,7 @@ slug: ko/api/wmrecurrencechoice
 public final class WmRecurrenceChoice extends FrameLayout implements WmControls.RestyleListener,WmControls.LanguageListener
 ```
 
-시작 날짜에 맞춘 한 번/매주/매월/매년 preset과 유형 편집 명령의 콤보. 팝업·편집 마법사 수명은 호출자가 담당한다.
+시작 날짜에 맞춘 한 번/매주/매월/매년 preset과 유형 편집 명령의 콤보. 팝업, 편집 마법사 수명은 호출자가 담당한다.
 
 ### 생성자
 
@@ -57,7 +57,7 @@ public void setRule(WmRecurrenceRule rule);
 public void setStart(WmDateTimeField.Value start);
 ```
 
-시작 날짜·시각만 바꾸고 preset 문구·선택을 다시 계산합니다. rule()과 규칙 변경 callback은 유지합니다. 월요일 주간 규칙에서 시작일을 화요일로 바꾸면 규칙은 월요일로 유지되고 새 시작일 preset과 달라 편집 항목(index4)을 표시할 수 있습니다. null start는 IllegalArgumentException입니다.
+시작 날짜, 시각만 바꾸고 preset 문구, 선택을 다시 계산합니다. rule()과 규칙 변경 callback은 유지합니다. 월요일 주간 규칙에서 시작일을 화요일로 바꾸면 규칙은 월요일로 유지되고 새 시작일 preset과 달라 편집 항목(index4)을 표시할 수 있습니다. null start는 IllegalArgumentException입니다.
 
 ### setLocale
 
@@ -65,7 +65,7 @@ public void setStart(WmDateTimeField.Value start);
 public void setLocale(Locale locale);
 ```
 
-월/요일·preset 문구를 바꾼다. rule과 시작 값은 유지한다. null은 `IllegalArgumentException`.
+월/요일, preset 문구를 바꾼다. rule과 시작 값은 유지한다. null은 `IllegalArgumentException`.
 
 ### onWmLanguageChanged
 
@@ -73,7 +73,7 @@ public void setLocale(Locale locale);
 public void onWmLanguageChanged(String language);
 ```
 
-공유 catalog 언어에 해당하는 Locale을 setLocale에 전달한다. 상태 보존·popup 처리는 setLocale 계약을 따른다.
+공유 catalog 언어에 해당하는 Locale을 setLocale에 전달한다. 상태 보존, popup 처리는 setLocale 계약을 따른다.
 
 ### setOnRuleChanged
 

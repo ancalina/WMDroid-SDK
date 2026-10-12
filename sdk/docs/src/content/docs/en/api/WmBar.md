@@ -46,7 +46,7 @@ Pass a title-bar button View. A command bar throws `IllegalStateException`. `sta
 
 Button backgrounds use the parent View width when positive, otherwise the bar bounds width or `WmMetrics.WIDTH`. Cell position must use the same parent coordinates as the bar. Null cell is not rejected by the factory but fails with `NullPointerException` when drawing accesses it. Each returned background has independent alpha/filter, invalidates on their changes, and reports `PixelFormat.TRANSLUCENT`. Bar alpha/filter changes do not propagate to these backgrounds.
 
-## draw · setAlpha · setColorFilter · getOpacity
+## draw, setAlpha, setColorFilter, getOpacity
 
 ```java
 public void draw(Canvas canvas);

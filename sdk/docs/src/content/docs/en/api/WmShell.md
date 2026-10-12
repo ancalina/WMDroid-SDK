@@ -124,7 +124,7 @@ public static void clockMode(Context context,boolean analog);
 
 Stores the shared clock mode. If the host cannot save it, uses this app's local preference.
 
-## rememberMusic(Context, int) · savedMusic(Context, int)
+## rememberMusic(Context, int), savedMusic(Context, int)
 
 ```java
 public static void rememberMusic(Context context,int current);

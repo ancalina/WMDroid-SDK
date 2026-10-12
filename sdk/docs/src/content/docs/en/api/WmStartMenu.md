@@ -19,7 +19,7 @@ public interface Select
 void accept(WmShell.Entry entry);
 ```
 
-## Constructor · refresh
+## Constructor, refresh
 
 ```text
 public WmStartMenu(Context context,List<WmShell.Entry> entries,Typeface font,int accent,Drawable background,Select selected);
@@ -30,7 +30,7 @@ Call on the UI thread. Null entries mean an empty list. The list is copied; Entr
 
 `ListView` creates visible rows and recycles them during scrolling. Menu width uses every caption in the current folder, including offscreen entries and the Back caption. Font, color, and caption changes through `refresh()` update visible rows and preserve the viewport. Structural changes and folder navigation reset the viewport to the start. Removing the current folder returns to the root. A null background reads the Start background from launcher settings. New rows can read icons and backgrounds synchronously. Entry.icon accepts `android.resource://` and `content://me.ancal.wmdroid.shell/...` only. Other content authorities, file URIs, and HTTP URIs return no icon.
 
-## setTextColor · setBackLabel
+## setTextColor, setBackLabel
 
 ```text
 public void setTextColor(int color);
@@ -39,7 +39,7 @@ public void setBackLabel(String value);
 
 Updates current row text colors or the Back caption. A null Back caption becomes an empty string. These methods do not reload icons.
 
-## setMaxHeight · menuWidth · onMeasure
+## setMaxHeight, menuWidth, onMeasure
 
 ```text
 public void setMaxHeight(int logicalPixels);
@@ -49,7 +49,7 @@ protected void onMeasure(int widthSpec,int heightSpec);
 
 Height and width use logical pixels. Negative maximum heights become 0. Menu width starts at 188, grows with captions, and stops at 342. Measurement does not exceed the parent's available size.
 
-## setIconsUnframed · setIconPolicy
+## setIconsUnframed, setIconPolicy
 
 ```text
 public void setIconsUnframed(boolean value);
@@ -58,7 +58,7 @@ public void setIconPolicy(WmIconPolicy value);
 
 `setIconsUnframed()` applies one policy to all apps. `setIconPolicy()` accepts app-specific policy. Null disables it for all apps. Only icons whose policy changes are processed again. See [WmIconPolicy](/en/api/wmiconpolicy/).
 
-## back · dismissFolders
+## back, dismissFolders
 
 ```text
 public boolean back();

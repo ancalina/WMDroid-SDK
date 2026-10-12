@@ -23,19 +23,19 @@ public void setColorFilter(ColorFilter value);
 public int getOpacity();
 ```
 
-`read()`는 InputStream을 닫지 않습니다. 최대 256 KiB입니다. 규격·숫자·JSON 오류는 `IOException`입니다.
+`read()`는 InputStream을 닫지 않습니다. 최대 256 KiB입니다. 규격, 숫자, JSON 오류는 `IOException`입니다.
 
-필수 값: version=1, width·height(0 초과, 4096 이하), intrinsicWidth·intrinsicHeight(1–4096), scale(fit 또는 stretch), pixelGrid·compositeFilter(boolean), parts(1–512개). 전체 path 명령은 최대 10000개입니다. ARGB 색은 # 없는 8자리 hex입니다.
+필수 값: version=1, width, height(0 초과, 4096 이하), intrinsicWidth, intrinsicHeight(1–4096), scale(fit 또는 stretch), pixelGrid, compositeFilter(boolean), parts(1–512개). 전체 path 명령은 최대 10000개입니다. ARGB 색은 # 없는 8자리 hex입니다.
 
-path 명령은 M·L(2값), C(6값), Q(4값), O(중심·양수 반지름 3값), Z(0값)입니다. fillRule은 winding 또는 evenodd입니다. alpha는 0–255, stroke width는 0 초과 4096 이하입니다. gradient 색은 2–64개이며 stops 수가 같고 0–1 순서여야 합니다. 모든 숫자는 finite이며 절댓값 100000 이하입니다. transform은 9값 Matrix입니다.
+path 명령은 M, L(2값), C(6값), Q(4값), O(중심, 양수 반지름 3값), Z(0값)입니다. fillRule은 winding 또는 evenodd입니다. alpha는 0–255, stroke width는 0 초과 4096 이하입니다. gradient 색은 2–64개이며 stops 수가 같고 0–1 순서여야 합니다. 모든 숫자는 finite이며 절댓값 100000 이하입니다. transform은 9값 Matrix입니다.
 
-fit은 종횡비를 유지해 중앙에 배치하고 stretch는 가로·세로를 따로 늘립니다. pixelGrid는 정수 변환·skew 없는 배치에서만 AA를 끕니다. compositeFilter는 전체 그림에 alpha·filter를 적용합니다.
+fit은 종횡비를 유지해 중앙에 배치하고 stretch는 가로, 세로를 따로 늘립니다. pixelGrid는 정수 변환, skew 없는 배치에서만 AA를 끕니다. compositeFilter는 전체 그림에 alpha, filter를 적용합니다.
 
 `getConstantState().newDrawable()`은 Paint 상태를 복제합니다. 각 소비자에 새 Drawable을 사용하세요. `setAlpha()`는 0–255로 제한합니다. `getOpacity()`는 TRANSLUCENT입니다. 파싱은 worker에서 수행하세요.
 
 ## JSON 구조
 
-모든 root 필드는 matrix를 제외하고 필수입니다. parts의 각 객체는 fillRule·path·color·alpha가 필수입니다.
+모든 root 필드는 matrix를 제외하고 필수입니다. parts의 각 객체는 fillRule, path, color, alpha가 필수입니다.
 
 | 객체 | 필드와 값 |
 | --- | --- |

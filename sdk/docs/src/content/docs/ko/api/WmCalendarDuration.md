@@ -35,7 +35,7 @@ Grouping은 비활성화하며 입력 전체가 숫자와 아래 단위에 해�
 public static long parseRfcMillis(String value);
 ```
 
-`+` 선택 접두어와 `P<n>W`, `P<n>D`, `T` 아래의 시간·분·초 조합을 밀리초로 반환한다. 연/월, 음수, 소수, 빈 구성요소, 끝의 빈 `T`, long 범위 초과는 `IllegalArgumentException`.
+`+` 선택 접두어와 `P<n>W`, `P<n>D`, `T` 아래의 시간, 분, 초 조합을 밀리초로 반환한다. 연/월, 음수, 소수, 빈 구성요소, 끝의 빈 `T`, long 범위 초과는 `IllegalArgumentException`.
 
 ### parseProviderMillis
 

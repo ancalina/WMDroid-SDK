@@ -24,11 +24,11 @@ null은 `IllegalArgumentException`이다. Bitmap을 복사하지 않고 shader�
 public void draw(Canvas canvas);
 ```
 
-현재 bounds를 양방향 반복 텍스처로 채운다. Bitmap을 늘리지 않고 shader offset `(-2, -2)`를 적용한다. 타일 기준은 현재 Canvas 좌표이며 bounds 왼쪽·위쪽으로 별도 이동하지 않는다. 표면 전체를 배율로 확대하면 타일도 같은 배율로 확대된다.
+현재 bounds를 양방향 반복 텍스처로 채운다. Bitmap을 늘리지 않고 shader offset `(-2, -2)`를 적용한다. 타일 기준은 현재 Canvas 좌표이며 bounds 왼쪽, 위쪽으로 별도 이동하지 않는다. 표면 전체를 배율로 확대하면 타일도 같은 배율로 확대된다.
 
 bounds 각 변에서 `1` 논리 픽셀 안쪽에 중심선을 둔 너비 `2`의 검은 테두리를 그린다. bounds는 호출자가 설정한다.
 
-## setAlpha · setColorFilter
+## setAlpha, setColorFilter
 
 ```java
 public void setAlpha(int alpha);

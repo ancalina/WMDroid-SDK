@@ -279,7 +279,7 @@ export default defineConfig({
         "label": "Fonts, resources, and rendering",
           "collapsed": true,
         "translations": {
-          "ko": "글꼴·리소스·표시"
+          "ko": "글꼴, 리소스, 표시"
         },
         "items": [
           {
@@ -342,7 +342,7 @@ export default defineConfig({
         "label": "Calendar, date, and time",
           "collapsed": true,
         "translations": {
-          "ko": "일정·날짜·시간"
+          "ko": "일정, 날짜, 시간"
         },
         "items": [
           {

@@ -19,7 +19,7 @@ public interface Selection
 void choose(int index);
 ```
 
-## Constructor · menuWidth · menuHeight · row · setSubmenuSelected
+## Constructor, menuWidth, menuHeight, row, setSubmenuSelected
 
 ```text
 public WmRadioMenu(Context context,Typeface font,String[] labels,int selected,String selectedSuffix,int selection,Selection action);
@@ -34,7 +34,7 @@ action is required. Tree items must be nonempty and contain no null entries. Fla
 
 menuWidth is label-measured and capped at 480 logical pixels. menuHeight is the unclipped content height; the caller caps viewport height. row returns the label View, or null for separators and invalid indices. setSubmenuSelected highlights only an enabled submenu row; -1 clears it. Views and callbacks use the main thread.
 
-## enableChoiceKeyboard · choose · keyboard
+## enableChoiceKeyboard, choose, keyboard
 
 ```text
 public void enableChoiceKeyboard(int selected,Selection live,Runnable close);
@@ -51,11 +51,11 @@ Use only for ordinary choice lists. All entries must be enabled without separato
 public int choiceDropdownHeight(int clientHeight);
 ```
 
-clientHeight caps the list area excluding its frame, in logical pixels. Negative values throw `IllegalArgumentException`. Call [enableChoiceKeyboard](#enablechoicekeyboard--choose--keyboard) first. Unconfigured keyboard choices or an empty list throw `IllegalStateException`.
+clientHeight caps the list area excluding its frame, in logical pixels. Negative values throw `IllegalArgumentException`. Call [enableChoiceKeyboard](#enablechoicekeyboard-choose-keyboard) first. Unconfigured keyboard choices or an empty list throw `IllegalStateException`.
 
 Returns `paddingTop+paddingBottom+min(itemCount,clientHeight/rowHeight)*rowHeight`. Integer division includes only complete rows. rowHeight is the first row's layout height, updated from current font metrics during keyboard-choice setup and restyling. A clientHeight of 0 returns only top and bottom padding.
 
-## enableChoiceCharacterSearch · searchCharacter
+## enableChoiceCharacterSearch, searchCharacter
 
 ```text
 public void enableChoiceCharacterSearch(Locale sortedLocale,Selection live);
@@ -74,7 +74,7 @@ public void setIconRows(Bitmap[] icons,Typeface regular,Typeface bold,boolean us
 
 Uses 36-high command rows, 32×32 icons, and text left=40 in logical pixels. Array length must match entries; only separators use null. Recycled Bitmaps, submenus, choice keyboard, null fonts, and nonpositive or nonfinite textSize throw `IllegalArgumentException`. Only the array is copied; the caller owns Bitmaps. Do not recycle during use. useBold selects the bold font role.
 
-## setEnabled · onWmRestyle · lifecycle
+## setEnabled, onWmRestyle, lifecycle
 
 ```text
 protected void onLayout(boolean changed,int left,int top,int right,int bottom);

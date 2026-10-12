@@ -8,9 +8,9 @@ slug: ko/api/wmphoneview
 public final class WmPhoneView extends LinearLayout implements WmControls.RestyleListener,WmControls.LanguageListener
 ```
 
-번호 입력·상태·음성 사서함·키패드 클라이언트. 실제 통화, 음성 사서함 설정, 연락처/기록 데이터는 소유 앱이 제공한다.
+번호 입력, 상태, 음성 사서함, 키패드 클라이언트. 실제 통화, 음성 사서함 설정, 연락처/기록 데이터는 소유 앱이 제공한다.
 
-## 생성자·Listener
+## 생성자, Listener
 
 ```java
 public interface Listener {void dial(String number);void voicemail();void speedDial();void history();}
@@ -18,7 +18,7 @@ public final WmPhoneKeypad keypad;
 public WmPhoneView(Context context,Typeface regular,Typeface bold,int selection,Listener listener)
 ```
 
-두 글꼴·listener 필수; null은 `IllegalArgumentException`. keypad는 이 뷰가 소유한 컨트롤. 숫자 키는 내부 버퍼에 추가·지우기. Talk는 번호가 비어 있지 않을 때 dial에 정규화된 번호 전달. 빈 버퍼에서 활성 음성 사서함 행을 탭하면 voicemail. 단축 다이얼/통화 기록은 각 콜백 전달.
+두 글꼴, listener 필수; null은 `IllegalArgumentException`. keypad는 이 뷰가 소유한 컨트롤. 숫자 키는 내부 버퍼에 추가, 지우기. Talk는 번호가 비어 있지 않을 때 dial에 정규화된 번호 전달. 빈 버퍼에서 활성 음성 사서함 행을 탭하면 voicemail. 단축 다이얼/통화 기록은 각 콜백 전달.
 
 ## Number
 
@@ -29,7 +29,7 @@ public void setNumber(String value)
 public void setCountryIso(String country)
 ```
 
-dialable은 입력 최대 256 UTF-16 코드 단위, 결과 최대 80. ASCII `0`..`9`·`*#+,;` 유지; ASCII 공백·괄호·하이픈·점 제거. null/그 외 문자/길이 초과는 `IllegalArgumentException`. 빈 문자열 허용. number는 서식 없는 버퍼, setNumber는 검증 후 표시 갱신. setCountryIso는 2 ASCII 영문자 또는 빈 문자열, null/잘못된 형식 거부. 국가 코드는 대문자로 저장하며 UI 언어와 별개. API21 이상·국가 코드 있음은 국가별 Android 번호 서식, 나머지는 legacy 서식 사용.
+dialable은 입력 최대 256 UTF-16 코드 단위, 결과 최대 80. ASCII `0`..`9`, `*#+,;` 유지; ASCII 공백, 괄호, 하이픈, 점 제거. null/그 외 문자/길이 초과는 `IllegalArgumentException`. 빈 문자열 허용. number는 서식 없는 버퍼, setNumber는 검증 후 표시 갱신. setCountryIso는 2 ASCII 영문자 또는 빈 문자열, null/잘못된 형식 거부. 국가 코드는 대문자로 저장하며 UI 언어와 별개. API21 이상, 국가 코드 있음은 국가별 Android 번호 서식, 나머지는 legacy 서식 사용.
 
 ## Status and keypad
 

@@ -41,7 +41,7 @@ public WmCalendarHeader(Context context,Typeface font,Locale locale);
 
 Locale은 null 불가(`IllegalArgumentException`). 도구 아이콘은 현재 리소스팩에서 읽고 누락 시 fallback을 사용한다. 초기 mode는 AGENDA.
 
-## 버튼·명령
+## 버튼, 명령
 
 ### setTodayButtonVisible
 
@@ -59,7 +59,7 @@ public void setOnCommandListener(OnCommandListener listener);
 
 같은 버튼에서 완성된 터치 UP을 command id로 통지한다. 움직여 다른 버튼으로 나가거나 다중 터치면 취소한다. null로 해제한다.
 
-## 언어·주 번호
+## 언어, 주 번호
 
 ### setLocale
 
@@ -67,7 +67,7 @@ public void setOnCommandListener(OnCommandListener listener);
 public void setLocale(Locale locale);
 ```
 
-날짜 문구·월 이름·요일 배치와 autosize를 갱신한다. null은 `IllegalArgumentException`.
+날짜 문구, 월 이름, 요일 배치와 autosize를 갱신한다. null은 `IllegalArgumentException`.
 
 ### setFirstDayOfWeek
 
@@ -101,7 +101,7 @@ public void setWeekNumbersVisible(boolean visible);
 
 Week 도구 모음의 주 선택기만 숨기거나 표시한다. 다른 View의 gutter 설정과 별개이다. 기본 true.
 
-## 날짜·모드
+## 날짜, 모드
 
 ### setDate
 
@@ -143,7 +143,7 @@ public void setYearRange(int first,int last);
 
 Year 문구용 first..last. first>=1, last>=first, 차이는0 또는1. 잘못된 범위는 `IllegalArgumentException`. 기준 날짜는 바꾸지 않는다.
 
-## 스타일·좌표·수명
+## 스타일, 좌표, 수명
 
 ### setColors
 
@@ -167,7 +167,7 @@ public Rect commandBounds(int id);
 protected void onMeasure(int width,int height);
 ```
 
-Android 측정·배치·그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
+Android 측정, 배치, 그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
 
 ### onWmRestyle
 
@@ -175,7 +175,7 @@ Android 측정·배치·그리기 hook. 논리 좌표와 현재 글꼴 지표로
 public void onWmRestyle(Typeface regular,Typeface bold,int selection,int tabColor);
 ```
 
-터치를 취소하고 일반 글꼴·선택색·파생 배경색을 갱신한다. 다음 배치에서 command geometry를 다시 계산한다.
+터치를 취소하고 일반 글꼴, 선택색, 파생 배경색을 갱신한다. 다음 배치에서 command geometry를 다시 계산한다.
 
 ### onDraw
 
@@ -183,7 +183,7 @@ public void onWmRestyle(Typeface regular,Typeface bold,int selection,int tabColo
 protected void onDraw(Canvas canvas);
 ```
 
-Android 측정·배치·그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
+Android 측정, 배치, 그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
 
 ### onTouchEvent
 
@@ -191,7 +191,7 @@ Android 측정·배치·그리기 hook. 논리 좌표와 현재 글꼴 지표로
 public boolean onTouchEvent(MotionEvent event);
 ```
 
-Android touch 경로. 같은 대상의 완성된 탭만 확정하며 취소·다중 터치·이동은 class의 선택 계약을 따른다. 직접 호출 대신 정상 View dispatch를 사용한다.
+Android touch 경로. 같은 대상의 완성된 탭만 확정하며 취소, 다중 터치, 이동은 class의 선택 계약을 따른다. 직접 호출 대신 정상 View dispatch를 사용한다.
 
 ### performClick
 

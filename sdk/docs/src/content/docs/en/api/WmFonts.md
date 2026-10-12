@@ -21,7 +21,7 @@ public static final class PreparedLine
 public final float width;
 ```
 
-## load(Context, String, boolean, boolean) · family(...)
+## load(Context, String, boolean, boolean), family(...)
 
 ```java
 @Deprecated public static boolean isCached(String source,boolean hybrid,boolean heavy);
@@ -44,7 +44,7 @@ public static void attach(TextView view,Typeface face);
 
 Call on the main thread after setTypeface. Applies needed fallback spans to current and future text and applies smoothing. Other spans, selection, and IME composition remain. Call again after changing fonts.
 
-## measure(Paint, String) · ellipsize(String, Paint, float)
+## measure(Paint, String), ellipsize(String, Paint, float)
 
 ```java
 public static float measure(Paint paint,String text);
@@ -53,7 +53,7 @@ public static String ellipsize(String text,Paint paint,float width);
 
 Measure with the linked faces or return an END-ellipsized string. width uses Paint-coordinate pixels. Use the same font and textSize as Canvas drawing.
 
-## prepare(Paint, String) · PreparedLine.draw(Canvas, float, float)
+## prepare(Paint, String), PreparedLine.draw(Canvas, float, float)
 
 ```java
 public static PreparedLine prepare(Paint paint,String text);
@@ -62,7 +62,7 @@ public void draw(Canvas canvas,float x,float baseline);
 
 Null paint or text throws `IllegalArgumentException`. Captures Paint and text state and stores width. Repeated drawing avoids measurement. x follows Paint.Align; baseline is the text baseline. Prepare a new line after font, text, or size changes. draw changes internal Paint state; do not draw one object concurrently.
 
-## draw(...) · drawCenteredListCaption(...)
+## draw(...), drawCenteredListCaption(...)
 
 ```java
 public static void draw(Canvas canvas,String text,float x,float baseline,Paint paint);
@@ -71,7 +71,7 @@ public static void drawCenteredListCaption(Canvas canvas,String text,RectF bound
 
 draw applies linked faces and shaping. x and baseline use Canvas coordinates. Centered captions center within bounds, then use left alignment and ASCII ... on overflow. Prefixes are limited to 259 UTF-16 units without splitting code points. Empty bounds do not paint. Null caption-drawing arguments throw `IllegalArgumentException`.
 
-## centerBaseline(...) · textBounds(...)
+## centerBaseline(...), textBounds(...)
 
 ```java
 public static float centerBaseline(Paint paint,float top,float bottom,String text);

@@ -47,7 +47,7 @@ android.widget.TextView status = me.ancal.wmdroid.sdk.WmControls.text(
 row.addView(status, new android.widget.LinearLayout.LayoutParams(0, -2, 1));
 ```
 
-Use WmChoice for selection without direct input, WmEditableChoice for input plus candidates, and WmBoxSelect for cell bit masks. The caller creates, positions, and removes popups. Follow preparation→bindDropdown→attachment in the [WmEditableChoice example](/en/api/wmeditablechoice/#open--binddropdown--isdroppeddown). See [WmControls.restyleTree](/en/api/wmcontrols/#restyletree) for callback and state-preservation limits.
+Use WmChoice for selection without direct input, WmEditableChoice for input plus candidates, and WmBoxSelect for cell bit masks. The caller creates, positions, and removes popups. Follow preparation→bindDropdown→attachment in the [WmEditableChoice example](/en/api/wmeditablechoice/#open-binddropdown-isdroppeddown). See [WmControls.restyleTree](/en/api/wmcontrols/#restyletree) for callback and state-preservation limits.
 
 ## Today layout
 

@@ -41,6 +41,6 @@ protected void onMeasure(int widthSpec,int heightSpec)
 Language changes update only the name, address, and location labels. `onMeasure` clamps the destination selector width.
 
 
-The owner supplies the location popup. Register opening through locationField().[setOnOpenListener](/en/api/wmchoice/#onopenlistener) and attach/remove the popup under the [bindDropdown](/en/api/wmchoice/#binddropdown--isdroppeddown--setextendedui--isextendedui--searchcharacter) contract. Commit with choose(sourceIndex) using the original locations index. The form stores lists/selection; it does not create popups or persist.
+The owner supplies the location popup. Register opening through locationField().[setOnOpenListener](/en/api/wmchoice/#onopenlistener) and attach/remove the popup under the [bindDropdown](/en/api/wmchoice/#binddropdown-isdroppeddown-setextendedui-isextendedui-searchcharacter) contract. Commit with choose(sourceIndex) using the original locations index. The form stores lists/selection; it does not create popups or persist.
 
 Source: `sdk/src/main/java/me/ancal/wmdroid/sdk/WmBrowserFavoriteForm.java`

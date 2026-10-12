@@ -38,13 +38,13 @@ public static final int TODAY_LINE = 28;
 | 상수 | 용도 |
 | --- | --- |
 | `WIDTH` | 논리 surface 기준 너비. |
-| `BAR`, `TAB` | 제목·명령 표시줄 높이, 탭 높이. |
+| `BAR`, `TAB` | 제목, 명령 표시줄 높이, 탭 높이. |
 | `FONT`, `LINE` | 기본 텍스트 크기, 기본 줄 높이. |
 | `GAP`, `INSET` | 줄 사이 간격, 기본 안쪽 여백. |
 | `BORDER`, `EDGE` | 테두리 두께, 컨트롤 가장자리 치수. |
-| `INDICATOR` | 공유 체크박스·라디오 표시기의 너비와 높이. |
+| `INDICATOR` | 공유 체크박스, 라디오 표시기의 너비와 높이. |
 | `TEXT_LEFT` | 기본 Today 텍스트의 왼쪽 위치. |
-| `ICON`, `ICON_INSET` | Today 아이콘 크기, 왼쪽·위 여백. |
+| `ICON`, `ICON_INSET` | Today 아이콘 크기, 왼쪽, 위 여백. |
 | `TODAY_MIN` | Today 항목 최소 높이. |
 | `TODAY_FONT`, `TODAY_LINE` | Today 기본 텍스트 크기, 줄 높이. |
 
@@ -64,6 +64,6 @@ public static int comboHeight(int textHeight);
 public static int todayHeight(int lines);
 ```
 
-`lines <= 1`이면 `40`을 반환한다. 그 외에는 `lines*28+(lines-1)*2+16`을 반환한다. 음수·0도 `40`이며 줄 수를 검증하지 않는다.
+`lines <= 1`이면 `40`을 반환한다. 그 외에는 `lines*28+(lines-1)*2+16`을 반환한다. 음수, 0도 `40`이며 줄 수를 검증하지 않는다.
 
-계산은 Java `int` 연산이다. 큰 줄 수의 오버플로를 제한하지 않으므로 소유자가 줄 수를 제한해야 한다. 텍스트 크기를 바꾼 Today 항목은 [WmToday.TextStyle.height](/ko/api/wmtoday/#textstyle)의 크기별 높이를 사용한다. 일정 제목·상세 블록은 `WmToday.Row.setAppointments()`로 구성한다.
+계산은 Java `int` 연산이다. 큰 줄 수의 오버플로를 제한하지 않으므로 소유자가 줄 수를 제한해야 한다. 텍스트 크기를 바꾼 Today 항목은 [WmToday.TextStyle.height](/ko/api/wmtoday/#textstyle)의 크기별 높이를 사용한다. 일정 제목, 상세 블록은 `WmToday.Row.setAppointments()`로 구성한다.

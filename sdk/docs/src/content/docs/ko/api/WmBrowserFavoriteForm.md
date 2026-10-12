@@ -8,7 +8,7 @@ slug: ko/api/wmbrowserfavoriteform
 public final class WmBrowserFavoriteForm extends LinearLayout implements WmControls.LanguageListener
 ```
 
-즐겨찾기 이름·주소·저장 위치를 입력하는 폼. 소유 앱이 위치 목록, 검증, 저장, 추가/취소 명령을 제공한다.
+즐겨찾기 이름, 주소, 저장 위치를 입력하는 폼. 소유 앱이 위치 목록, 검증, 저장, 추가/취소 명령을 제공한다.
 
 ## 생성자
 
@@ -38,9 +38,9 @@ public void onWmLanguageChanged(String language)
 protected void onMeasure(int widthSpec,int heightSpec)
 ```
 
-언어 변경은 이름·주소·위치 레이블만 갱신한다. `onMeasure`는 위치 선택기의 폭을 제한한다.
+언어 변경은 이름, 주소, 위치 레이블만 갱신한다. `onMeasure`는 위치 선택기의 폭을 제한한다.
 
 
-위치 팝업은 소유 앱이 제공합니다. locationField().[setOnOpenListener](/ko/api/wmchoice/#onopenlistener)에 열기를 등록하고 [bindDropdown](/ko/api/wmchoice/#binddropdown--isdroppeddown--setextendedui--isextendedui--searchcharacter) 계약에 따라 팝업을 연결·제거합니다. 확정 시 choose(sourceIndex)에 원본 locations 인덱스를 전달합니다. 폼은 목록·선택을 보관하며 팝업 생성·저장은 하지 않습니다.
+위치 팝업은 소유 앱이 제공합니다. locationField().[setOnOpenListener](/ko/api/wmchoice/#onopenlistener)에 열기를 등록하고 [bindDropdown](/ko/api/wmchoice/#binddropdown-isdroppeddown-setextendedui-isextendedui-searchcharacter) 계약에 따라 팝업을 연결, 제거합니다. 확정 시 choose(sourceIndex)에 원본 locations 인덱스를 전달합니다. 폼은 목록, 선택을 보관하며 팝업 생성, 저장은 하지 않습니다.
 
 소스: `sdk/src/main/java/me/ancal/wmdroid/sdk/WmBrowserFavoriteForm.java`

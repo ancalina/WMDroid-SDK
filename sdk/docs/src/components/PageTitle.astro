@@ -25,7 +25,7 @@ const ko = route.lang === 'ko';
   </nav>
 )}
 {isApi && path && path.length === 3 && (
-  <span hidden data-pagefind-meta="title">{`${path[2]} · ${path[1]} · ${ko ? '한국어' : 'English'}`}</span>
+  <span hidden data-pagefind-meta="title">{`${path[2]}, ${path[1]}, ${ko ? '한국어' : 'English'}`}</span>
 )}
 <div data-pagefind-ignore><PageTitle /></div>
 <style>

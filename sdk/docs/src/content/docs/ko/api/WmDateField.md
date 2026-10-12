@@ -21,7 +21,7 @@ public WmDateField(Context context,Typeface font,Locale locale,WmDateTimeField.V
 
 font/locale는 null 불가. value는 null 또는 기본 범위의 실제 날짜. `shortDateFormat=true`는 지역 짧은 날짜, false(기본)는 4자리 연도 형식이다. 잘못된 값은 `IllegalArgumentException`. 짧은 yy 형식은 선택 시 yyyy로 펼치지만 연도 숫자 입력을 무시한다.
 
-## 값·범위·직렬화
+## 값, 범위, 직렬화
 
 ### value
 
@@ -37,7 +37,7 @@ public WmDateTimeField.Value value();
 public void setRange(WmDateTimeField.Value minimum,WmDateTimeField.Value maximum);
 ```
 
-시간을 무시한 순서 있는 non-null 날짜 경계. 기본 전체 범위 안이어야 한다. 현재 날짜를 조용히 범위에 맞춰 clamp하고 초안·터치를 취소한다. 잘못된 경계는 `IllegalArgumentException`이며 상태를 바꾸지 않는다.
+시간을 무시한 순서 있는 non-null 날짜 경계. 기본 전체 범위 안이어야 한다. 현재 날짜를 조용히 범위에 맞춰 clamp하고 초안, 터치를 취소한다. 잘못된 경계는 `IllegalArgumentException`이며 상태를 바꾸지 않는다.
 
 ### setAllowEmpty
 
@@ -71,7 +71,7 @@ public static String formatValue(WmDateTimeField.Value value);
 public Bundle saveInteractionState();
 ```
 
-schema2의 선택 segment·미완성 숫자만 반환한다. 현재 날짜는 `formatValue`로 별도 보존한다.
+schema2의 선택 segment, 미완성 숫자만 반환한다. 현재 날짜는 `formatValue`로 별도 보존한다.
 
 ### validateInteractionState
 
@@ -79,7 +79,7 @@ schema2의 선택 segment·미완성 숫자만 반환한다. 현재 날짜는 `f
 public static void validateInteractionState(Bundle state,WmDateTimeField.Value value);
 ```
 
-schema1/2와 주어진 nullable 날짜를 검증한다. 숫자는 아직 완성되지 않은 ASCII 입력이어야 한다. 잘못된 스키마·역할·숫자/날짜 조합은 `IllegalArgumentException`; 상태를 변경하지 않는다.
+schema1/2와 주어진 nullable 날짜를 검증한다. 숫자는 아직 완성되지 않은 ASCII 입력이어야 한다. 잘못된 스키마, 역할, 숫자/날짜 조합은 `IllegalArgumentException`; 상태를 변경하지 않는다.
 
 ### restoreInteractionState
 
@@ -87,9 +87,9 @@ schema1/2와 주어진 nullable 날짜를 검증한다. 숫자는 아직 완성�
 public void restoreInteractionState(Bundle state);
 ```
 
-현재 값·형식·range에 맞춰 검증한 뒤 선택과 숫자 초안을 조용히 복원한다. 날짜를 먼저 복원한다. 잘못된 snapshot은 `IllegalArgumentException`.
+현재 값, 형식, range에 맞춰 검증한 뒤 선택과 숫자 초안을 조용히 복원한다. 날짜를 먼저 복원한다. 잘못된 snapshot은 `IllegalArgumentException`.
 
-## 날짜 편집·구간 선택
+## 날짜 편집, 구간 선택
 
 ### setValue
 
@@ -97,7 +97,7 @@ public void restoreInteractionState(Bundle state);
 public void setValue(WmDateTimeField.Value value);
 ```
 
-범위/nullable 정책을 검증한 뒤 조용히 교체한다. 초안 숫자·터치는 취소하며 변경 콜백은 호출하지 않는다. 잘못된 값은 `IllegalArgumentException`.
+범위/nullable 정책을 검증한 뒤 조용히 교체한다. 초안 숫자, 터치는 취소하며 변경 콜백은 호출하지 않는다. 잘못된 값은 `IllegalArgumentException`.
 
 ### selectDate
 
@@ -105,7 +105,7 @@ public void setValue(WmDateTimeField.Value value);
 public void selectDate(int year,int month,int day);
 ```
 
-실제 날짜(month1..12)·현재 범위를 먼저 검증합니다. 잘못된 값은 비활성이어도 IllegalArgumentException입니다. 검증 후 disabled이면 값을 바꾸지 않습니다. 활성 상태는 값을 반영하고 이전 값과 다르면 변경 callback을 동기로 호출합니다.
+실제 날짜(month1..12), 현재 범위를 먼저 검증합니다. 잘못된 값은 비활성이어도 IllegalArgumentException입니다. 검증 후 disabled이면 값을 바꾸지 않습니다. 활성 상태는 값을 반영하고 이전 값과 다르면 변경 callback을 동기로 호출합니다.
 
 ### clearDate
 
@@ -131,7 +131,7 @@ public void selectField(int field);
 
 YEAR/MONTH/DAY_OF_MONTH만 허용한다. 다른 segment로 바꿀 때 활성 필드의 미완성 숫자를 먼저 commit한다. 잘못된 역할은 `IllegalArgumentException`.
 
-## 언어·팝업·콜백
+## 언어, 팝업, 콜백
 
 ### setLocale
 
@@ -139,7 +139,7 @@ YEAR/MONTH/DAY_OF_MONTH만 허용한다. 다른 segment로 바꿀 때 활성 필
 public void setLocale(Locale locale);
 ```
 
-지역별 segment 순서·문구·날짜 형식을 바꾼다. 값은 유지하고 터치를 취소한다. null 또는 SimpleDateFormat으로 표현 불가능한 형식은 `IllegalArgumentException`.
+지역별 segment 순서, 문구, 날짜 형식을 바꾼다. 값은 유지하고 터치를 취소한다. null 또는 SimpleDateFormat으로 표현 불가능한 형식은 `IllegalArgumentException`.
 
 ### onWmLanguageChanged
 
@@ -147,7 +147,7 @@ public void setLocale(Locale locale);
 public void onWmLanguageChanged(String language);
 ```
 
-공유 catalog 언어에 해당하는 Locale을 setLocale에 전달한다. 상태 보존·popup 처리는 setLocale 계약을 따른다.
+공유 catalog 언어에 해당하는 Locale을 setLocale에 전달한다. 상태 보존, popup 처리는 setLocale 계약을 따른다.
 
 ### bindDropdown
 
@@ -181,7 +181,7 @@ public void setOnValueChangedListener(OnValueChangedListener listener);
 
 사용자 변경의 이전/새 nullable 날짜를 동기 통지한다. 값이 같거나 조용한 setter/복원이면 호출하지 않는다. null로 해제한다.
 
-## 키보드·터치
+## 키보드, 터치
 
 ### onKeyDown
 
@@ -189,7 +189,7 @@ public void setOnValueChangedListener(OnValueChangedListener listener);
 public boolean onKeyDown(int key,KeyEvent event);
 ```
 
-DPAD_CENTER/F4/PAGE_DOWN은 dropdown 요청. 좌우는 날짜 segment 이동, 위아래·numpad +/-는 값 증감, HOME/END는 해당 segment 경계, Ctrl+HOME은 오늘 날짜. 구분자는 다음 segment, 현지 숫자·전각 숫자는 숫자 초안에 입력한다. 날짜 확정·범위 처리는 위 입력 계약을 따른다.
+DPAD_CENTER/F4/PAGE_DOWN은 dropdown 요청. 좌우는 날짜 segment 이동, 위아래, numpad +/-는 값 증감, HOME/END는 해당 segment 경계, Ctrl+HOME은 오늘 날짜. 구분자는 다음 segment, 현지 숫자, 전각 숫자는 숫자 초안에 입력한다. 날짜 확정, 범위 처리는 위 입력 계약을 따른다.
 
 ### onKeyUp
 
@@ -205,7 +205,7 @@ public boolean onKeyUp(int key,KeyEvent event);
 public boolean onTouchEvent(MotionEvent event);
 ```
 
-일반 필드의 본문 탭은 날짜 구간을 선택하고, 화살표는 소유자의 드롭다운을 연다. `WmTaskEditor`에서 반환한 필드는 본문 전체에서 달력을 열고, 닫힌 동안 연도 네 자리의 날짜를 표시한다. 취소·다중 터치·대상 밖 이동은 활성화를 취소한다. 일반 View 이벤트 전달을 사용한다.
+일반 필드의 본문 탭은 날짜 구간을 선택하고, 화살표는 소유자의 드롭다운을 연다. `WmTaskEditor`에서 반환한 필드는 본문 전체에서 달력을 열고, 닫힌 동안 연도 네 자리의 날짜를 표시한다. 취소, 다중 터치, 대상 밖 이동은 활성화를 취소한다. 일반 View 이벤트 전달을 사용한다.
 
 ### performClick
 
@@ -215,7 +215,7 @@ public boolean performClick();
 
 비활성이면 false. 초점을 요청하고 비어 있는 날짜를 범위 안의 오늘 날짜로 활성화한 뒤 Android click을 전달한다. callback 중 비활성화되면 false.
 
-## 스타일·초점·수명
+## 스타일, 초점, 수명
 
 ### setBordered
 
@@ -223,7 +223,7 @@ public boolean performClick();
 public void setBordered(boolean value);
 ```
 
-true이면 독립 DATE용 테두리를 그린다. 기본 inline 필드는 테두리 없다. 값·패딩·범위는 바꾸지 않는다.
+true이면 독립 DATE용 테두리를 그린다. 기본 inline 필드는 테두리 없다. 값, 패딩, 범위는 바꾸지 않는다.
 
 ### onMeasure
 
@@ -231,7 +231,7 @@ true이면 독립 DATE용 테두리를 그린다. 기본 inline 필드는 테두
 protected void onMeasure(int widthSpec,int heightSpec);
 ```
 
-Android 측정·배치·그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
+Android 측정, 배치, 그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
 
 ### onDraw
 
@@ -239,7 +239,7 @@ Android 측정·배치·그리기 hook. 논리 좌표와 현재 글꼴 지표로
 protected void onDraw(Canvas canvas);
 ```
 
-Android 측정·배치·그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
+Android 측정, 배치, 그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
 
 ### setEnabled
 
@@ -247,7 +247,7 @@ Android 측정·배치·그리기 hook. 논리 좌표와 현재 글꼴 지표로
 public void setEnabled(boolean enabled);
 ```
 
-비활성화하면 터치·숫자 초안·dropdown pressed 상태를 취소한다. 확정된 날짜는 유지한다.
+비활성화하면 터치, 숫자 초안, dropdown pressed 상태를 취소한다. 확정된 날짜는 유지한다.
 
 ### onFocusChanged
 
@@ -263,7 +263,7 @@ Android가 초점 변경 시 호출한다. 선택 구간 없이 초점을 얻으
 protected void onSizeChanged(int width,int height,int oldWidth,int oldHeight);
 ```
 
-Android 측정·배치·그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
+Android 측정, 배치, 그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
 
 ### onDetachedFromWindow
 
@@ -279,7 +279,7 @@ protected void onDetachedFromWindow();
 public void onWmRestyle(Typeface regular,Typeface bold,int selection,int tabColor);
 ```
 
-regular null은 IllegalArgumentException. 일반 글꼴·선택색을 갱신하고 터치를 취소하며 표시 geometry를 다시 측정한다. 날짜는 유지한다.
+regular null은 IllegalArgumentException. 일반 글꼴, 선택색을 갱신하고 터치를 취소하며 표시 geometry를 다시 측정한다. 날짜는 유지한다.
 
 ## OnValueChangedListener
 

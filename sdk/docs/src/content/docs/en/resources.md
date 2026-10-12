@@ -7,14 +7,14 @@ For class contracts, use [WmResources](/en/api/wmresources/), [WmResourcePack](/
 
 ## Install a pack
 
-1. On a worker, pass the app-opened InputStream to [WmResources.install(context, input)](/en/api/wmresources/#installcontext-inputstream--resetcontext), handle IOException, and close the stream in the app.
+1. On a worker, pass the app-opened InputStream to [WmResources.install(context, input)](/en/api/wmresources/#installcontext-inputstream-resetcontext), handle IOException, and close the stream in the app.
 2. Read revision after installation completes. The local pack immediately becomes this process’s selection. Lower-level [WmResourcePack.install](/en/api/wmresourcepack/) operates on a store and is distinct from this selection entry point.
 3. On the UI thread, reapply screen resources and invalidate app-owned artwork caches. Completing install alone does not replace existing View artwork.
 4. Later successful host synchronization can select the mirror again. Follow [WmResources](/en/api/wmresources/) for unavailable-host, empty-generation, and reset selection rules.
 
 ## Apply an imported font
 
-On a worker, use [WmFontFile.importFont](/en/api/wmfontfile/) and obtain the file’s `source()` URI: `content://me.ancal.wmdroid.shell/fonts/<64 lowercase hex digits>`. `resolve()` validates and stores a provider file locally. The caller closes its InputStream. Prepare [WmFonts.load](/en/api/wmfonts/#loadcontext-string-boolean-boolean--family) on a worker, then apply setTypeface/attach or restyleTree on the UI thread. Do not change or delete a file while a Typeface uses it.
+On a worker, use [WmFontFile.importFont](/en/api/wmfontfile/) and obtain the file’s `source()` URI: `content://me.ancal.wmdroid.shell/fonts/<64 lowercase hex digits>`. `resolve()` validates and stores a provider file locally. The caller closes its InputStream. Prepare [WmFonts.load](/en/api/wmfonts/#loadcontext-string-boolean-boolean-family) on a worker, then apply setTypeface/attach or restyleTree on the UI thread. Do not change or delete a file while a Typeface uses it.
 
 ## Resource API
 

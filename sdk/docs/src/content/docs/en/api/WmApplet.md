@@ -21,7 +21,7 @@ protected int accent;
 protected WmWindow shellWindow;
 ```
 
-## onCreate(Bundle) · lifecycle
+## onCreate(Bundle), lifecycle
 
 ```text
 public void onCreate(Bundle saved);
@@ -34,7 +34,7 @@ After super.onCreate, add body Views to content. regular, bold, accent, and shel
 
 Resume updates host state, fonts, and resources and starts clock, tray, and STATE observation. Pause stops observation and timers and closes menus and popups. Destroy shuts down the font worker. Call the superclass in lifecycle overrides.
 
-## onShellStateChanged(State) · onResourcesChanged()
+## onShellStateChanged(State), onResourcesChanged()
 
 ```text
 protected void onShellStateChanged(WmShell.State state);
@@ -43,7 +43,7 @@ protected void onResourcesChanged();
 
 Hooks run after appearance state is applied. Update body language and app-owned artwork caches here. Editors can remain attached. Resource synchronization runs on a worker. The first font can load synchronously on the main thread during onCreate state application. Later font switches with unprepared caches use worker preparation. Hooks run on the main thread. onResourcesChanged runs when the resource revision observed by chrome changes, including initial application. onShellStateChanged follows on every state application, even with unchanged values. It is not a font-ready notification; reapplying state after worker completion can invoke the hooks again.
 
-## caption(String) · label(String) · entry(String, Runnable)
+## caption(String), label(String), entry(String, Runnable)
 
 ```text
 protected final void caption(String value);
@@ -61,7 +61,7 @@ protected final void closeButton(boolean ok,Runnable action);
 
 ok=true uses OK; false uses X. A null action calls finish. An active WmInputDialog uses OK and accepts input. A blocking modal owner prevents the close action.
 
-## softKeys(...) · softKeyMenu(...)
+## softKeys(...), softKeyMenu(...)
 
 ```text
 protected final TextView softKey(String value,boolean right,Runnable action);
@@ -71,7 +71,7 @@ protected final void softKeyMenu(boolean right,String caption,Runnable action);
 
 softKeys replaces left and right commands and closes the current command menu. A null action disables the command. softKeyMenu opens on DOWN. softKey returns a separate TextView without attaching it to the footer.
 
-## showCommandMenu(...) · dismissCommandMenu()
+## showCommandMenu(...), dismissCommandMenu()
 
 ```text
 protected final WmCommandMenu showCommandMenu(boolean right,String[] labels,int selected,WmRadioMenu.Selection action);
@@ -81,7 +81,7 @@ protected final void dismissCommandMenu();
 
 The flat overload delivers row indices; the tree overload delivers leaf IDs. Opens after closing Start, popups, and the previous menu. The returned menu lives until dismissal or pause. selected=-1 omits the radio marker. Follow [WmCommandMenu](/en/api/wmcommandmenu/) for argument rules.
 
-## showPopup(String, View, int, int) · dismissPopup()
+## showPopup(String, View, int, int), dismissPopup()
 
 ```text
 protected final WmPopup showPopup(String caption,View body,int width,int anchor);
@@ -90,7 +90,7 @@ protected final void dismissPopup();
 
 width is 1–480; anchor is a logical-surface x coordinate. Out-of-range width throws `IllegalArgumentException`. body must be unattached. Closes Start, the previous popup, and command menus, then restyles body. Outside taps, Back, pause, and Start dismiss the popup. Cancel or ignore asynchronous updates after dismissal.
 
-## onTray(int, int) · launchSystem(Intent)
+## onTray(int, int), launchSystem(Intent)
 
 ```text
 protected void onTray(final int kind,int anchor);
@@ -99,7 +99,7 @@ protected void launchSystem(Intent intent);
 
 The default tray hook opens connection, volume, power, or phone panels. kind uses WmTraySlot constants. launchSystem attempts a zero-animation system Activity, then basic Settings if launch fails. Override for app-specific navigation.
 
-## onClock() · onClockMenu() · onClockPanelShown(WmClockPanel)
+## onClock(), onClockMenu(), onClockPanelShown(WmClockPanel)
 
 ```text
 protected void onClock();
@@ -110,7 +110,7 @@ protected final void analogClock(boolean analog);
 
 The default clock popup closes after 7 seconds. Supply this app's permission-backed appointment data in onClockPanelShown. Cancel or ignore asynchronous updates after panel detachment. The clock menu saves the shared analog mode. analogClock changes only the current applet display.
 
-## shade(int) · tab(...) · tabSelected(...) · viewport()
+## shade(int), tab(...), tabSelected(...), viewport()
 
 ```text
 protected final int shade(int original);
@@ -121,7 +121,7 @@ protected final WmViewport viewport();
 
 shade changes an authored ARGB hue to accent; gray accents use grayscale. tab returns a new tab TextView. tabSelected updates an existing selected marker. viewport returns the WmViewport for scale and insets.
 
-## onBackPressed() · finish()
+## onBackPressed(), finish()
 
 ```text
 public void onBackPressed();

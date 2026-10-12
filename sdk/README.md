@@ -2,7 +2,7 @@
 
 [한국어](README.ko.md)
 
-[한국어 개발 가이드](docs/src/content/docs/ko/index.md) · [English developer guide](docs/src/content/docs/en/index.md) · [API reference](docs/src/content/docs/en/api.md)
+[한국어 개발 가이드](docs/src/content/docs/ko/index.md), [English developer guide](docs/src/content/docs/en/index.md), [API reference](docs/src/content/docs/en/api.md)
 
 Publish Today modules from an Android app, or use the shared controls and shell
 in a WM-style activity. A Today provider can belong to an app with a normal

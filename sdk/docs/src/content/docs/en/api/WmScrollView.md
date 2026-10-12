@@ -46,7 +46,7 @@ Stops flinging and stores the requested `y`, clamping negative values to `0`. Ap
 
 Android ScrollView clamps the maximum offset against content/viewport geometry when applied. A pending request can exceed the current maximum offset. A touch DOWN while enabled, or detachment, clears the pending request.
 
-## getScrollPosition · getRequestedScrollPosition
+## getScrollPosition, getRequestedScrollPosition
 
 ```java
 public int getScrollPosition();
@@ -71,7 +71,7 @@ public void stopFling();
 
 Directly sends DOWN→CANCEL to the internal ScrollView's touch handler and CANCEL to its interception handler to stop flinging. Does not dispatch events to contents or invoke content click/selection callbacks. Does not clear a pending position request.
 
-## setEnabled · dispatchKeyEvent
+## setEnabled, dispatchKeyEvent
 
 ```java
 public void setEnabled(boolean enabled);

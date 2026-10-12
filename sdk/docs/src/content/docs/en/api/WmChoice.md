@@ -26,7 +26,7 @@ public interface OnOpenListener
 void open(WmChoice source);
 ```
 
-## Constructor · setChoices · choices
+## Constructor, setChoices, choices
 
 ```text
 public WmChoice(Context context,Typeface font,String[] choices,int selected,int selection);
@@ -38,7 +38,7 @@ choices must contain at least one non-null string. selected is a valid source in
 
 With a bound ordinary keyboard-enabled popup, `setChoices()` and `setDisplaySort()` replace its rows in place, reset character search, and apply the current display selection without calling the choice listener. Replaced row views cannot commit. The popup and its callbacks remain; caller-owned width and height do not change. With no selection, replacement resets the caret and scroll position to the first row. This bulk operation adapts reset/add/select behavior; it is not an individual native combo message API.
 
-## selectedIndex · setSelectedIndex · clearSelection · choose · chooseDisplayIndex · chooseCharacterDisplayIndex
+## selectedIndex, setSelectedIndex, clearSelection, choose, chooseDisplayIndex, chooseCharacterDisplayIndex
 
 ```text
 public void clearSelection();
@@ -54,7 +54,7 @@ selectedIndex is the source index, or -1 after clearSelection. setSelectedIndex 
 
 For an open list with choice keyboard handling enabled, `setSelectedIndex()` updates selection and caret in display order and scrolls that row to the top, clamped to the scroll range. `clearSelection()` clears list selection while retaining the caret, scroll position and popup. User selection only scrolls the row into view.
 
-## setDisplaySort · displaySortLocale · displayChoices · displaySelectedIndex
+## setDisplaySort, displaySortLocale, displayChoices, displaySelectedIndex
 
 ```text
 public void setDisplaySort(Locale locale,int pinnedPrefixCount);
@@ -65,7 +65,7 @@ public int displaySelectedIndex();
 
 locale is required; pinnedPrefixCount is 0–choices.length. Invalid values throw `IllegalArgumentException`. Preserves the prefix and sorts later display entries with Collator SECONDARY; labels beginning with [ follow other labels. Source indices and callback identity remain. displayChoices returns a new display array. displaySelectedIndex returns its index or -1. New choices retain the current sorting policy.
 
-## bindDropdown · isDroppedDown · setExtendedUi · isExtendedUi · searchCharacter
+## bindDropdown, isDroppedDown, setExtendedUi, isExtendedUi, searchCharacter
 
 ```text
 public boolean onTouchEvent(MotionEvent event);
@@ -87,7 +87,7 @@ setOnOpenListener registers the click callback that creates the popup. bindDropd
 
 Default closed Home/End selects the first or last entry. setExtendedUi(true) opens on closed Down and ignores Up, Home, End, Page, and F4. Ordinary toggle keys are unmodified F4 and Alt+Up/Down. When closed, they call the open callback; when open, they forward the key to the bound popup. extendedUi=true ignores F4 and opens from closed state only on unmodified Down. Alt+Up/Down retains the toggle path. searchCharacter accepts one UTF-16 unit and returns false while disabled, dropped, or pressed. Otherwise it returns true even without a match. A match applies selection and calls chosen synchronously; the return value does not indicate a match. Sorted search accumulates for one second; unsorted search cycles. ACTION_MULTIPLE with KEYCODE_UNKNOWN and a nonempty character string searches each UTF-16 unit in order. Ctrl/Alt/Meta or control units other than Backspace/Escape reject the whole string before search. Processing stops if the target rejects a later unit; earlier callbacks remain committed. IME composition remains unsupported.
 
-## onWmRestyle · onMeasure · onDraw · drawableStateChanged
+## onWmRestyle, onMeasure, onDraw, drawableStateChanged
 
 ```text
 protected void onMeasure(int widthSpec,int heightSpec);

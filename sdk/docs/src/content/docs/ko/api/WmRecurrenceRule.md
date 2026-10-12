@@ -51,7 +51,7 @@ public final int count;
 public long minimumPeriodMinutes();
 ```
 
-약속 기간·알림 검증 한계를 분 단위로 반환한다. 실제 반복 일정을 확장해 구한 최단 간격은 아니다.
+약속 기간, 알림 검증 한계를 분 단위로 반환한다. 실제 반복 일정을 확장해 구한 최단 간격은 아니다.
 
 | 반복 유형 | 반환값(분) |
 | --- | --- |
@@ -70,7 +70,7 @@ public long minimumPeriodMinutes();
 public void validateAppointmentDuration(long civilMillis);
 ```
 
-`civilMillis`는 시간대 오프셋 변화를 제외하고 연·월·일·시·분 표시값 사이에서 계산한 기간(밀리초)이다. 음수이면 반복 유형과 관계없이 `IllegalArgumentException`. 반복이 있으면 `minimumPeriodMinutes() * 60000`을 초과할 때 예외를 던지며 같은 값은 허용한다. NONE은 상한 검사 없이 0 이상의 기간을 허용한다. DST를 가로지르는 실제 경과 밀리초를 그대로 전달하지 않는다.
+`civilMillis`는 시간대 오프셋 변화를 제외하고 연, 월, 일, 시, 분 표시값 사이에서 계산한 기간(밀리초)이다. 음수이면 반복 유형과 관계없이 `IllegalArgumentException`. 반복이 있으면 `minimumPeriodMinutes() * 60000`을 초과할 때 예외를 던지며 같은 값은 허용한다. NONE은 상한 검사 없이 0 이상의 기간을 허용한다. DST를 가로지르는 실제 경과 밀리초를 그대로 전달하지 않는다.
 
 ### validateAppointmentReminder
 
@@ -110,7 +110,7 @@ public static WmRecurrenceRule weekly(int interval,int dayMask);
 public static WmRecurrenceRule monthlyDay(int interval,int day);
 ```
 
-양의 월 간격과 날짜 1..31. 짧은 달의 처리·인스턴스 확장은 Provider 책임이다. 잘못된 값은 `IllegalArgumentException`.
+양의 월 간격과 날짜 1..31. 짧은 달의 처리, 인스턴스 확장은 Provider 책임이다. 잘못된 값은 `IllegalArgumentException`.
 
 ### monthlyOrdinal
 
@@ -184,7 +184,7 @@ public String toAllDayRrule(String untilDate);
 public boolean equals(Object other);
 ```
 
-모든 유형·간격·요일·날짜·순번·종료·횟수 필드로 값 동등성을 계산한다.
+모든 유형, 간격, 요일, 날짜, 순번, 종료, 횟수 필드로 값 동등성을 계산한다.
 
 ### hashCode
 
@@ -192,6 +192,6 @@ public boolean equals(Object other);
 public int hashCode();
 ```
 
-모든 유형·간격·요일·날짜·순번·종료·횟수 필드로 해시를 계산한다. 동등한 규칙은 같은 해시를 반환한다.
+모든 유형, 간격, 요일, 날짜, 순번, 종료, 횟수 필드로 해시를 계산한다. 동등한 규칙은 같은 해시를 반환한다.
 
 소스: `sdk/src/main/java/me/ancal/wmdroid/sdk/WmRecurrenceRule.java`

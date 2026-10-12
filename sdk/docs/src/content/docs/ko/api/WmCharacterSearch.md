@@ -4,7 +4,7 @@ slug: ko/api/wmcharactersearch
 ---
 [API](/ko/api/)
 
-선택 필드·팝업 목록의 키보드 문자 검색 상태를 공유하는 package-private 구현입니다.
+선택 필드, 팝업 목록의 키보드 문자 검색 상태를 공유하는 package-private 구현입니다.
 
 `sdk/src/main/java/me/ancal/wmdroid/sdk/WmCharacterSearch.java`
 

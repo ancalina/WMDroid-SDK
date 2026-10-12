@@ -39,7 +39,7 @@ public void openSelection()
 public void setEnabled(boolean enabled)
 ```
 
-`setEntries`는 배열을 복사하고 null 배열/항목·중복 키를 변경 전에 거부한다(`IllegalArgumentException`). 기존 키가 남으면 새 항목으로 선택을 유지하고, 아니면 첫 항목 선택; 빈 배열에서는 null. 교체 시 double-tap 기록 초기화. `selected()`는 현재 항목 또는 null. `openSelection()`은 활성 상태이며 선택이 있을 때만 콜백 호출. `setEnabled`는 목록·스크롤바에도 적용하며 double-tap 기록을 초기화한다.
+`setEntries`는 배열을 복사하고 null 배열/항목, 중복 키를 변경 전에 거부한다(`IllegalArgumentException`). 기존 키가 남으면 새 항목으로 선택을 유지하고, 아니면 첫 항목 선택; 빈 배열에서는 null. 교체 시 double-tap 기록 초기화. `selected()`는 현재 항목 또는 null. `openSelection()`은 활성 상태이며 선택이 있을 때만 콜백 호출. `setEnabled`는 목록, 스크롤바에도 적용하며 double-tap 기록을 초기화한다.
 
 ## Layout and style
 

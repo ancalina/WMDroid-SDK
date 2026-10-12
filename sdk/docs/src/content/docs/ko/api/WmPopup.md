@@ -8,7 +8,7 @@ slug: ko/api/wmpopup
 public final class WmPopup extends FrameLayout
 ```
 
-꼬리 있는 팝업의 제목과 본문을 배치한다. 호출자가 overlay에 추가하고 위치·크기·닫기·버튼 callback을 관리한다. UI 스레드에서 생성·갱신한다. 좌표와 크기는 논리 픽셀이다.
+꼬리 있는 팝업의 제목과 본문을 배치한다. 호출자가 overlay에 추가하고 위치, 크기, 닫기, 버튼 callback을 관리한다. UI 스레드에서 생성, 갱신한다. 좌표와 크기는 논리 픽셀이다.
 
 ## 생성자
 
@@ -18,9 +18,9 @@ public WmPopup(Context context,Typeface font,String caption,int anchor,int from,
 
 `content`는 null이 아니고 부모가 없는 View여야 한다. 본문 컨테이너의 자식으로 추가하며 높이는 내용에 맞춘다. 팝업 내부의 빈 영역을 누르는 동작은 기본적으로 아무 작업도 하지 않는다.
 
-`anchor`는 팝업 내부의 꼬리 x좌표이며 생성 후 유지한다. surface 좌표를 사용할 때는 [leftForAnchor](#leftforanchor) 반환값을 빼서 전달한다. `from`·`to`는 제목 배경의 왼쪽·오른쪽 ARGB 색이다.
+`anchor`는 팝업 내부의 꼬리 x좌표이며 생성 후 유지한다. surface 좌표를 사용할 때는 [leftForAnchor](#leftforanchor) 반환값을 빼서 전달한다. `from`, `to`는 제목 배경의 왼쪽, 오른쪽 ARGB 색이다.
 
-제목은 y=`28`, 높이 `44`, 좌우 여백 `20`이다. 본문은 y=`72`, 좌우·아래 여백 `4`이며 아래 모서리를 반지름 `16`으로 clip한다. API 18 미만에서는 본문의 software layer로 clipping을 처리한다. 본문 스크롤과 버튼은 `content`에 구성한다.
+제목은 y=`28`, 높이 `44`, 좌우 여백 `20`이다. 본문은 y=`72`, 좌우, 아래 여백 `4`이며 아래 모서리를 반지름 `16`으로 clip한다. API 18 미만에서는 본문의 software layer로 clipping을 처리한다. 본문 스크롤과 버튼은 `content`에 구성한다.
 
 ## heading
 
@@ -55,6 +55,6 @@ public void setCaption(String caption);
 public void setColors(int from,int to);
 ```
 
-저장된 꼬리 위치를 유지하고 새 [WmBubble](/ko/api/wmbubble/) 배경을 적용한다. 두 ARGB 색은 제목과 꼬리의 수평 gradient에 사용하며 흰 본문·검은 테두리는 유지한다.
+저장된 꼬리 위치를 유지하고 새 [WmBubble](/ko/api/wmbubble/) 배경을 적용한다. 두 ARGB 색은 제목과 꼬리의 수평 gradient에 사용하며 흰 본문, 검은 테두리는 유지한다.
 
 소스: `sdk/src/main/java/me/ancal/wmdroid/sdk/WmPopup.java`

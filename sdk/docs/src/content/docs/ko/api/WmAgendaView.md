@@ -8,7 +8,7 @@ slug: ko/api/wmagendaview
 public final class WmAgendaView extends LinearLayout implements WmControls.RestyleListener,WmControls.LanguageListener
 ```
 
-하루 약속을 종일 목록·읽기 전용 시각 strip·시간순 두 줄 목록으로 표시한다. 호출자가 표시 날짜로 자른 분 값과 약속 문구를 제공하며 데이터 조회와 카드 열기도 담당한다. 원본의 선택적 날짜 footer는 미구현이다. 원본 GDI 지표와 Android 래스터의 픽셀 일치는 미검증이다. View 상태는 UI 스레드에서 변경하며 터치 callback은 동기 실행한다.
+하루 약속을 종일 목록, 읽기 전용 시각 strip, 시간순 두 줄 목록으로 표시한다. 호출자가 표시 날짜로 자른 분 값과 약속 문구를 제공하며 데이터 조회와 카드 열기도 담당한다. 원본의 선택적 날짜 footer는 미구현이다. 원본 GDI 지표와 Android 래스터의 픽셀 일치는 미검증이다. View 상태는 UI 스레드에서 변경하며 터치 callback은 동기 실행한다.
 
 ## 사용 준비
 
@@ -26,7 +26,7 @@ font/locale는 null 불가(`IllegalArgumentException`). 현재 날짜로 시작�
 public void setOnEventListener(OnEventListener listener);
 ```
 
-완성된 행 탭의 callback을 설정한다. null로 해제한다. 터치·callback 순서는 [OnEventListener](#oneventlistener)를 따른다. 프로그램 선택은 통지하지 않는다.
+완성된 행 탭의 callback을 설정한다. null로 해제한다. 터치, callback 순서는 [OnEventListener](#oneventlistener)를 따른다. 프로그램 선택은 통지하지 않는다.
 
 ### setDisplayIconMask
 
@@ -44,7 +44,7 @@ public int getDisplayIconMask();
 
 현재 심볼 표시 mask를 반환한다. 기본값은 ALL(63).
 
-## 일정·날짜
+## 일정, 날짜
 
 ### setEvents
 
@@ -74,7 +74,7 @@ public boolean selectEvent(Event event);
 public void setDate(int year,int month,int date);
 ```
 
-1 기반 month의 실제 Gregorian 날짜를 상태 변경 전 검증한다. 잘못된 날짜는 `IllegalArgumentException`. 유효한 호출은 항상 행 터치를 취소하고 경과 갱신을 재예약한다. 날짜가 달라지면 기록·충돌·선택을 지우고 두 스크롤 위치를 0으로 요청하며 strip phase를 1로 초기화한다. 이후 `setEvents`를 호출한다. 같은 날짜는 해당 상태를 유지한다. 두 경로 모두 listener는 통지하지 않는다.
+1 기반 month의 실제 Gregorian 날짜를 상태 변경 전 검증한다. 잘못된 날짜는 `IllegalArgumentException`. 유효한 호출은 항상 행 터치를 취소하고 경과 갱신을 재예약한다. 날짜가 달라지면 기록, 충돌, 선택을 지우고 두 스크롤 위치를 0으로 요청하며 strip phase를 1로 초기화한다. 이후 `setEvents`를 호출한다. 같은 날짜는 해당 상태를 유지한다. 두 경로 모두 listener는 통지하지 않는다.
 
 ### date
 
@@ -84,7 +84,7 @@ public int[] date();
 
 새 `[year,month,day]` 배열. month는 1 기반.
 
-## 언어·표시
+## 언어, 표시
 
 ### setLocale
 
@@ -100,7 +100,7 @@ null은 변경 전 `IllegalArgumentException`. catalog 문구를 갱신하고 �
 public void onWmLanguageChanged(String language);
 ```
 
-공유 catalog 문구만 갱신한다. 명시적 Locale, 호출자 일정 원문, 선택·스크롤은 유지한다.
+공유 catalog 문구만 갱신한다. 명시적 Locale, 호출자 일정 원문, 선택, 스크롤은 유지한다.
 
 ### setShowBusyInDescription
 
@@ -126,7 +126,7 @@ public void setColors(int selection);
 
 ARGB 선택색을 설정하고 `WmPalette.face(selection)`으로 face를 계산하며 두 스크롤 트리를 restyle한다. strip의 busyColor=0 기록은 새 선택색을 따르며 0 아닌 색은 유지한다. 행 터치를 취소하되 선택을 지우거나 listener를 통지하지 않는다.
 
-## 행·strip 좌표
+## 행, strip 좌표
 
 ### getRowHeight
 
@@ -192,7 +192,7 @@ phase는 0/1/2만 허용하며 그 외는 상태 변경 전 `IllegalArgumentExce
 
 `step = floor(backingWidth / 24.5)`, `backingWidth = floor(현재 strip 너비 * 2.4)`. strip 너비가 0이면 다음 양수 너비 layout에서 적용한다. 기록을 선택하거나 listener를 통지하지 않는다.
 
-시간 행 DOWN·완성 탭·`selectEvent`는 시작/기간과 이전 phase로 phase를 선택한다. 이 pan은 1 ms 간격 callback을 요청하며 남은 거리가 4픽셀보다 크면 정수 distance/4만큼 이동한다. 4픽셀 이내에서는 이전 이동량을 남은 거리로 제한하므로 이전 이동량이 0이면 목표 전에 멈출 수 있다. callback 시점은 Android 스케줄링이며 실기기 WM의 측정 시점은 아니다.
+시간 행 DOWN, 완성 탭, `selectEvent`는 시작/기간과 이전 phase로 phase를 선택한다. 이 pan은 1 ms 간격 callback을 요청하며 남은 거리가 4픽셀보다 크면 정수 distance/4만큼 이동한다. 4픽셀 이내에서는 이전 이동량을 남은 거리로 제한하므로 이전 이동량이 0이면 목표 전에 멈출 수 있다. callback 시점은 Android 스케줄링이며 실기기 WM의 측정 시점은 아니다.
 
 ### rowBounds
 
@@ -216,7 +216,7 @@ phase 이동 전 전체 strip 배경의 새 Rect이다. null/미등록은 null. 
 public void scrollToRow(int index);
 ```
 
-정렬된 시간 목록의 index*rowHeight 위치를 요청하며 실제 끝 위치는 viewport로 제한된다. index는 0 기반이며 빈 목록은 0만 허용한다. 범위 밖이면 요청 전 `IllegalArgumentException`. 선택·초점·통지는 하지 않는다. [WmScrollView](/ko/api/wmscrollview/#scrolltoposition)는 layout까지 요청을 지연할 수 있다.
+정렬된 시간 목록의 index*rowHeight 위치를 요청하며 실제 끝 위치는 viewport로 제한된다. index는 0 기반이며 빈 목록은 0만 허용한다. 범위 밖이면 요청 전 `IllegalArgumentException`. 선택, 초점, 통지는 하지 않는다. [WmScrollView](/ko/api/wmscrollview/#scrolltoposition)는 layout까지 요청을 지연할 수 있다.
 
 ### hasConflict
 
@@ -224,11 +224,11 @@ public void scrollToRow(int index);
 public boolean hasConflict(Event event);
 ```
 
-Event identity의 캐시된 충돌 여부를 반환한다. null·미등록·종일·FREE·원래 시작 epoch 없는 legacy 기록은 false. 후보는 자르기 전 원래 epoch 구간을 사용한다. FREE 아닌 종일 기록이 있으면 모든 시간 후보가 충돌하며 그 외는 시작/끝을 엄격 비교한다. 끝/시작이 맞닿기만 하면 충돌하지 않으며 기간 0인 후보를 별도로 제외하지 않는다. 중복 참조는 같은 Event의 다른 항목을 건너뛰는 identity 기반 검사로 계산한다.
+Event identity의 캐시된 충돌 여부를 반환한다. null, 미등록, 종일, FREE, 원래 시작 epoch 없는 legacy 기록은 false. 후보는 자르기 전 원래 epoch 구간을 사용한다. FREE 아닌 종일 기록이 있으면 모든 시간 후보가 충돌하며 그 외는 시작/끝을 엄격 비교한다. 끝/시작이 맞닿기만 하면 충돌하지 않으며 기간 0인 후보를 별도로 제외하지 않는다. 중복 참조는 같은 Event의 다른 항목을 건너뛰는 identity 기반 검사로 계산한다.
 
 목록 분리/정렬 시 재계산하며 시간 경과로 결과를 바꾸지 않는다. 경과 기록도 결과는 유지하되 행 충돌 아이콘/빨간 시간 문구를 숨긴다. 선택된 strip 괄호는 여전히 충돌 빨간색을 사용할 수 있다.
 
-## 스타일·수명
+## 스타일, 수명
 
 ### onWmRestyle
 
@@ -236,7 +236,7 @@ Event identity의 캐시된 충돌 여부를 반환한다. null·미등록·종�
 public void onWmRestyle(Typeface regular,Typeface bold,int selection,int tabColor);
 ```
 
-regular null은 변경 전 `IllegalArgumentException`. 목록에는 `WmMetrics.FONT`, strip에는 19 논리 픽셀 크기의 regular를 사용하며 bold/tabColor는 반영하지 않는다. 행 터치를 취소하고 geometry와 선택색 기반 face를 갱신하며 기록·선택은 유지한다. 두 목록의 요청된 분수 행 위치를 content 픽셀로 반올림하여 복원한다. 원본 GDI 지표와 strip face는 미검증이다.
+regular null은 변경 전 `IllegalArgumentException`. 목록에는 `WmMetrics.FONT`, strip에는 19 논리 픽셀 크기의 regular를 사용하며 bold/tabColor는 반영하지 않는다. 행 터치를 취소하고 geometry와 선택색 기반 face를 갱신하며 기록, 선택은 유지한다. 두 목록의 요청된 분수 행 위치를 content 픽셀로 반올림하여 복원한다. 원본 GDI 지표와 strip face는 미검증이다.
 
 ### onAttachedToWindow
 
@@ -244,7 +244,7 @@ regular null은 변경 전 `IllegalArgumentException`. 목록에는 `WmMetrics.F
 protected void onAttachedToWindow();
 ```
 
-superclass 부착 후 경과 갱신을 설정한다. 부착·window VISIBLE·isShown이며 epoch 종료를 가진 시간 기록이 있을 때만 작동한다. 모두 경과했어도 TIME_CHANGED/TIMEZONE_CHANGED receiver를 등록하며 API 33+는 RECEIVER_NOT_EXPORTED를 사용한다. 아직 경과하지 않은 다음 종료에 end-now+1 ms로 예약하되 한 번의 지연은 최대 Integer.MAX_VALUE+1 ms로 제한한다. timer는 시간 행을 무효화하고 재예약하며 종료와 같은 시각은 경과가 아니다. 정적 boolean past 기록을 시각에 맞게 바꾸려면 소유자가 기록을 교체해야 한다.
+superclass 부착 후 경과 갱신을 설정한다. 부착, window VISIBLE, isShown이며 epoch 종료를 가진 시간 기록이 있을 때만 작동한다. 모두 경과했어도 TIME_CHANGED/TIMEZONE_CHANGED receiver를 등록하며 API 33+는 RECEIVER_NOT_EXPORTED를 사용한다. 아직 경과하지 않은 다음 종료에 end-now+1 ms로 예약하되 한 번의 지연은 최대 Integer.MAX_VALUE+1 ms로 제한한다. timer는 시간 행을 무효화하고 재예약하며 종료와 같은 시각은 경과가 아니다. 정적 boolean past 기록을 시각에 맞게 바꾸려면 소유자가 기록을 교체해야 한다.
 
 ### onWindowVisibilityChanged
 
@@ -268,7 +268,7 @@ superclass 처리 후 자신/상위 View의 표시 변경에 같은 [경과 갱�
 protected void onDetachedFromWindow();
 ```
 
-superclass detach 전에 경과/strip callback·시각 receiver·행 터치를 해제한다. 기록·선택·현재 offset은 유지한다. 재부착은 표시 조건에 맞춰 경과 갱신을 다시 시작하며 중지된 strip pan은 재시작하지 않는다.
+superclass detach 전에 경과/strip callback, 시각 receiver, 행 터치를 해제한다. 기록, 선택, 현재 offset은 유지한다. 재부착은 표시 조건에 맞춰 경과 갱신을 다시 시작하며 중지된 strip pan은 재시작하지 않는다.
 
 ## Event
 
@@ -339,7 +339,7 @@ public interface OnEventListener
 void onSelected(Event event);
 ```
 
-같은 행의 완성된 UP이 touch slop 이내면 등록된 Event를 전달한다. DOWN은 눌림 표시·목록 초점·시간 strip pan을 시작할 수 있지만 선택을 확정하지 않는다. slop 초과 이동·행 이탈·CANCEL·다중 터치·크기 변경·detach는 탭을 취소한다. DOWN이 취소돼도 변경된 strip phase/pan은 남을 수 있다. callback 전에 선택을 확정하며 프로그램 선택은 통지하지 않는다.
+같은 행의 완성된 UP이 touch slop 이내면 등록된 Event를 전달한다. DOWN은 눌림 표시, 목록 초점, 시간 strip pan을 시작할 수 있지만 선택을 확정하지 않는다. slop 초과 이동, 행 이탈, CANCEL, 다중 터치, 크기 변경, detach는 탭을 취소한다. DOWN이 취소돼도 변경된 strip phase/pan은 남을 수 있다. callback 전에 선택을 확정하며 프로그램 선택은 통지하지 않는다.
 
 ### onOpen
 

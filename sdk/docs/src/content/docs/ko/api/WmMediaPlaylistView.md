@@ -8,7 +8,7 @@ slug: ko/api/wmmediaplaylistview
 public final class WmMediaPlaylistView extends LinearLayout implements WmControls.RestyleListener,WmControls.LanguageListener
 ```
 
-지금 재생 목록, 선택 행, 위/아래 이동·추가·제거·속성 툴바. 실제 큐 변경과 재생은 소유 앱이 명령 콜백에서 수행한다.
+지금 재생 목록, 선택 행, 위/아래 이동, 추가, 제거, 속성 툴바. 실제 큐 변경과 재생은 소유 앱이 명령 콜백에서 수행한다.
 
 ## Commands
 
@@ -54,6 +54,6 @@ public void onWmRestyle(Typeface regular,Typeface bold,int color,int tabColor)
 public void onWmLanguageChanged(String value)
 ```
 
-재스타일은 행 글꼴·선택 색과 제목/툴바 배경을 갱신한다. 언어 변경은 툴바·제목 접근성 캡션을 갱신하며 미디어 제목은 그대로 유지한다.
+재스타일은 행 글꼴, 선택 색과 제목/툴바 배경을 갱신한다. 언어 변경은 툴바, 제목 접근성 캡션을 갱신하며 미디어 제목은 그대로 유지한다.
 
 소스: `sdk/src/main/java/me/ancal/wmdroid/sdk/WmMediaPlaylistView.java`

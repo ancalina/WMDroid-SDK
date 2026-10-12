@@ -18,7 +18,7 @@ public WmDialog(Context context);
 
 Creates an empty container. The caller supplies child layout, content, and command callbacks.
 
-## setDefaultButton · setCancelButton
+## setDefaultButton, setCancelButton
 
 ```java
 public final void setDefaultButton(TextView button);
@@ -49,7 +49,7 @@ Enter and NUMPAD_ENTER target the focused SDK push button. When focus is on the 
 
 Commands do not run when a child modal blocks owner commands or focus belongs to a nested dialog. An owned push-button target consumes DOWN and UP. Only an uncanceled DOWN clicks the target, and every View from the button through the dialog must be enabled and VISIBLE. Disabled or hidden targets still consume these keys without a click.
 
-## onAttachedToWindow · onDetachedFromWindow
+## onAttachedToWindow, onDetachedFromWindow
 
 ```java
 protected void onAttachedToWindow();

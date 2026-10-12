@@ -33,7 +33,7 @@ Translates the Canvas to the current bounds' left/top before drawing. Coordinate
 
 The selected tab omits its top border to join the white page. Neither state draws a bottom border. The first `1`-pixel row of an unselected tab remains untouched. A normal return restores Canvas state. The caller sets bounds.
 
-## setAlpha · setColorFilter
+## setAlpha, setColorFilter
 
 ```java
 public void setAlpha(int a);

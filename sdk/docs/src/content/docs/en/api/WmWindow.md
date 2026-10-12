@@ -13,7 +13,7 @@ Lays out title, body, bottom commands, and popups on one logical surface.
 
 `sdk/src/main/java/me/ancal/wmdroid/sdk/WmWindow.java`
 
-## Constructor · client
+## Constructor, client
 
 ```java
 public WmWindow(Context context);
@@ -53,7 +53,7 @@ Creates the internal FrameLayout on first call and returns the same reference th
 
 The owner manages popup child placement, replacement, removal, background touches, and dismissal. This method does not fill a backdrop, block touches, or register modal state. Do not remove or reparent the returned layer.
 
-## onMeasure · onLayout
+## onMeasure, onLayout
 
 ```java
 protected void onMeasure(int width,int height);

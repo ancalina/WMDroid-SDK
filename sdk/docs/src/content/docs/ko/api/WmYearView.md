@@ -18,9 +18,9 @@ Calendar 연도 보기. 폭160 논리 픽셀 단위의 작은 월 타일을 배�
 public WmYearView(Context context,Typeface font,Locale locale);
 ```
 
-현재 날짜로 시작한다. null Locale은 `IllegalArgumentException`. 작은 날짜 숫자는 atlas, 제목·탭 날짜 말풍선은 제공한 글꼴이다.
+현재 날짜로 시작한다. null Locale은 `IllegalArgumentException`. 작은 날짜 숫자는 atlas, 제목, 탭 날짜 말풍선은 제공한 글꼴이다.
 
-## 날짜·범위 선택
+## 날짜, 범위 선택
 
 ### setOnDayClickListener
 
@@ -36,7 +36,7 @@ public void setOnDayClickListener(OnDayClickListener listener);
 public void setOnRangeChangedListener(OnRangeChangedListener listener);
 ```
 
-날짜·월 페이지·visible 수가 달라지거나 showYearStart에서 현재 year/month/day를 동기 통지한다. geometry getter/resize에서도 발생할 수 있다. null로 해제한다.
+날짜, 월 페이지, visible 수가 달라지거나 showYearStart에서 현재 year/month/day를 동기 통지한다. geometry getter/resize에서도 발생할 수 있다. null로 해제한다.
 
 ### setDate
 
@@ -52,9 +52,9 @@ public void setDate(int year,int month,int day);
 public int[] date();
 ```
 
-현재 저장된 날짜 상태의 새 [year,month,day] 배열입니다. 페이지 첫 날짜·터치 후보와 구분하며 터치만으로 이 상태를 바꾸지 않습니다. 확정 날짜를 반영하려면 소유자가 setDate를 호출합니다.
+현재 저장된 날짜 상태의 새 [year,month,day] 배열입니다. 페이지 첫 날짜, 터치 후보와 구분하며 터치만으로 이 상태를 바꾸지 않습니다. 확정 날짜를 반영하려면 소유자가 setDate를 호출합니다.
 
-## 언어·표시
+## 언어, 표시
 
 ### setLocale
 
@@ -88,7 +88,7 @@ public void setColors(int selection);
 
 월 제목 face를 선택색에서 파생한다. atlas 날짜색은 바꾸지 않는다.
 
-## 연도 배치·좌표
+## 연도 배치, 좌표
 
 ### getMonthOffset
 
@@ -144,7 +144,7 @@ public Rect monthTitleBounds(int index);
 protected void onSizeChanged(int w,int h,int oldw,int oldh);
 ```
 
-Android 측정·배치·그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
+Android 측정, 배치, 그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
 
 ### onWmRestyle
 
@@ -152,9 +152,9 @@ Android 측정·배치·그리기 hook. 논리 좌표와 현재 글꼴 지표로
 public void onWmRestyle(Typeface regular,Typeface bold,int selection,int tabColor);
 ```
 
-글꼴·파생 배경색을 바꾸고 터치를 취소한다. 글꼴 변경 시 표시 월 수를 다시 측정하며 첫 표시 월을 유지한다.
+글꼴, 파생 배경색을 바꾸고 터치를 취소한다. 글꼴 변경 시 표시 월 수를 다시 측정하며 첫 표시 월을 유지한다.
 
-## 탐색·입력·수명
+## 탐색, 입력, 수명
 
 ### showYearStart
 
@@ -186,7 +186,7 @@ DPAD_UP/DOWN은 표시 월을 한 tile 행(현재 columns개)만큼 이동한다
 protected void onDraw(Canvas canvas);
 ```
 
-Android 측정·배치·그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
+Android 측정, 배치, 그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
 
 ### dateAt
 
@@ -204,7 +204,7 @@ public boolean onTouchEvent(MotionEvent event);
 
 활성 상태의 DOWN에서 키보드 포커스를 요청한다. 빈 영역도 포함한다. 기본적으로 터치 모드에서도 포커스를 받을 수 있다.
 
-DOWN/MOVE에서 날짜 후보·확대 말풍선을 갱신하며 빈 영역으로 이동하면 후보를 지웁니다. UP은 마지막 DOWN/MOVE의 후보가 남아 있을 때만 choose를 동기로 호출하며 UP 좌표를 다시 계산하지 않습니다. 취소·다중 터치는 후보를 지우고 통지하지 않습니다. 저장된 date()는 바꾸지 않으므로 확정 날짜는 소유자가 setDate로 반영합니다.
+DOWN/MOVE에서 날짜 후보, 확대 말풍선을 갱신하며 빈 영역으로 이동하면 후보를 지웁니다. UP은 마지막 DOWN/MOVE의 후보가 남아 있을 때만 choose를 동기로 호출하며 UP 좌표를 다시 계산하지 않습니다. 취소, 다중 터치는 후보를 지우고 통지하지 않습니다. 저장된 date()는 바꾸지 않으므로 확정 날짜는 소유자가 setDate로 반영합니다.
 
 ### performClick
 
@@ -248,6 +248,6 @@ public interface OnRangeChangedListener
 void changed(int year,int month,int day);
 ```
 
-날짜·월 페이지·visible 수가 달라지거나 showYearStart에서 현재 year/month/day를 동기 통지한다. geometry getter/resize에서도 발생할 수 있다. null로 해제한다.
+날짜, 월 페이지, visible 수가 달라지거나 showYearStart에서 현재 year/month/day를 동기 통지한다. geometry getter/resize에서도 발생할 수 있다. null로 해제한다.
 
 소스: `sdk/src/main/java/me/ancal/wmdroid/sdk/WmYearView.java`

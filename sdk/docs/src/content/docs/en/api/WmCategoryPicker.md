@@ -51,7 +51,7 @@ Schema1 requires exactly five keys without reveal; schema2 requires exactly six 
 
 The snapshot does not include Context, fonts, or Locale. The supplied Locale creates a new Collator. Pass the original Locale to retain the sorting and name-matching policy. The owner reconnects New/OK/Cancel UI and applies `result()` only on OK.
 
-## value · result · isChanged
+## value, result, isChanged
 
 ```java
 public String value();
@@ -83,7 +83,7 @@ public String[] categoryNames();
 
 Returns a new array of the current sorted catalog. Modifying the array does not change the internal list. It includes names originally found only in the selection and newly added names.
 
-## isChecked · setChecked
+## isChecked, setChecked
 
 ```java
 public boolean isChecked(String name);

@@ -35,7 +35,7 @@ int notifyPage(int index,int notification);
 default int notifyPage(int index,int notification,int parameter);
 ```
 
-## Constructor · addPage
+## Constructor, addPage
 
 ```text
 public int addPage(CharSequence title,View page);
@@ -49,7 +49,7 @@ Title and View must be non-null; the View must be unattached. Invalid input thro
 
 Explicit pageId values are `1–65535`; duplicates are allowed. The automatic-ID overload first tries `pageCount()+1`, then the first unused ID from `1`. Exhausting IDs throws `IllegalStateException`. Both overloads return the zero-based page index. Adding during notification throws `IllegalStateException`.
 
-## selectPage · trySelectPage · restoreSelectedPage
+## selectPage, trySelectPage, restoreSelectedPage
 
 ```text
 public void selectPage(int index);
@@ -74,7 +74,7 @@ Activation focus handling runs only when selection changes and the window is att
 
 `selectPage` discards the boolean result. `restoreSelectedPage` validates and commits without notifications, callbacks, or activation focus handling. During notification, restoration throws `IllegalStateException` before index validation.
 
-## applyPages · cancelPages
+## applyPages, cancelPages
 
 ```text
 public boolean applyPages(boolean closing);
@@ -92,7 +92,7 @@ After all pages succeed, `applyPages(false)` resolves SETACTIVE again from the c
 
 True reports operation approval. The owner performs any Activity/window completion; the sheet does not close it.
 
-## setPageChanged · isPageChanged · hasChanges · page access
+## setPageChanged, isPageChanged, hasChanges, page access
 
 ```text
 public int pageCount();
@@ -110,7 +110,7 @@ public void setPageTitle(int index,CharSequence title);
 
 `setPageTitle` checks the index, then rejects a null title with `IllegalArgumentException`. It displays the supplied text without translation and recalculates tab width.
 
-## listeners · notifyPage · back · onWmRestyle
+## listeners, notifyPage, back, onWmRestyle
 
 ```text
 public boolean dispatchKeyEvent(KeyEvent event);

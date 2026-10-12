@@ -34,15 +34,15 @@ public void onRestoreInstanceState(Parcelable value);
 
 UNCHECKED=0, CHECKED=1, and INDETERMINATE=2. getCheckState returns this state. Inherited isChecked is true only for CHECKED.
 
-### setCheckState · setChecked
+### setCheckState, setChecked
 
 setCheckState throws `IllegalArgumentException` for negative values and clamps values above 2 to 2. setChecked(true/false) selects 1/0. Setters do not call OnCheckStateListener. The inherited boolean listener follows CheckBox behavior.
 
-### setAutomatic · toggle
+### setAutomatic, toggle
 
 automatic defaults to true. An enabled automatic toggle cycles 0→1→2→0 and calls the state listener after a change. Toggling inside the callback does not reenter the listener. disabled or automatic=false makes toggle do nothing.
 
-### onSaveInstanceState · onRestoreInstanceState
+### onSaveInstanceState, onRestoreInstanceState
 
 SavedState saves and restores state and automatic. The indeterminate accessibility description uses the current language. Change state on the main thread.
 

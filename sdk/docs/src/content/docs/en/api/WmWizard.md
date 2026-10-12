@@ -26,7 +26,7 @@ public interface OnPageChangedListener
 void selected(int index);
 ```
 
-## Constructor · addPage · selectPage · page access
+## Constructor, addPage, selectPage, page access
 
 ```text
 public int addPage(View page);
@@ -38,7 +38,7 @@ public int selectedPage();
 
 font and locale are required. page must be unattached; addPage returns its index. Invalid arguments throw `IllegalArgumentException`; invalid indices throw `IndexOutOfBoundsException`. The first page is selected automatically. selectPage bypasses the gate. An actual page change resets finishHere=false, refreshes display, then calls selected synchronously. Selecting the current index does nothing and calls no callback.
 
-## Navigation · completion callbacks
+## Navigation, completion callbacks
 
 ```text
 public void setFinishHere(boolean finishHere);
@@ -57,7 +57,7 @@ public boolean back();
 
 Next and Back first call NavigationGate.allow(from,to); false prevents navigation. setFinishHere(true) shows Finish early for the current step. Actual page changes clear it; set it again in selected for another step that permits early completion. Cancel and Finish run caller callbacks without closing the dialog. setError hides null or empty messages and displays others. Button accessors return internal TextViews. BackHandler first delegates to the current page, then attempts the preceding step.
 
-## saveInteractionState · validateInteractionState · restoreInteractionState
+## saveInteractionState, validateInteractionState, restoreInteractionState
 
 ```text
 public Bundle saveInteractionState();
@@ -67,7 +67,7 @@ public void restoreInteractionState(Bundle state);
 
 The schema=1 Bundle stores page count, selection, finishHere, error, and requested scroll positions only when the page passed directly to addPage is itself a WmScrollView. Other pages store -1; descendants are not searched. The caller saves nested scroll, input drafts, focus, and popup state separately. Different page counts, scroll-owner status at each index, or schema values throw `IllegalArgumentException`. restore validates before mutation and skips gates and callbacks. Restoring during notification throws `IllegalStateException`.
 
-## setLocale · onWmRestyle · onMeasure
+## setLocale, onWmRestyle, onMeasure
 
 ```text
 public void setLocale(Locale locale);

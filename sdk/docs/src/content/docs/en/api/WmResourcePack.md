@@ -29,7 +29,7 @@ Installation and active-pack reads accept only version 2; other versions throw `
 
 The official extractor writes `assets/<role-path>` IDs and role-based ZIP paths. Catalog paths are `metadata/library.json` and `metadata/folders.json`. User packs can map IDs to other safe paths. You can edit images, fonts, sounds, and mappings before import; matching original pixel hashes is not an installation condition. File size, path, extension, and mapping checks still apply.
 
-## active(File) · deactivate(File)
+## active(File), deactivate(File)
 
 ```java
 public static synchronized WmResourcePack active(File store)throws IOException;
@@ -38,7 +38,7 @@ public static synchronized void deactivate(File store)throws IOException;
 
 No active pointer returns null. An unreadable installed pointer or manifest throws `IOException`. deactivate clears only selection. Previous snapshot files remain available to readers. Old generations are not deleted automatically.
 
-## ids() · generation() · open(String)
+## ids(), generation(), open(String)
 
 ```java
 public Set<String> ids();

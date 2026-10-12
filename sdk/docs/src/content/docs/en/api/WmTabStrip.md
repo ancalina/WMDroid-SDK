@@ -48,7 +48,7 @@ Shows right-side overflow when total tab width exceeds measured width. Each arro
 
 Width, font-metric, or selection changes adjust the viewport at the next measurement to reveal the selected tab. A tab wider than the viewport aligns its leading position without guaranteeing complete visibility. Arrow scrolling does not change selection or pages.
 
-## onLayout · dispatchDraw
+## onLayout, dispatchDraw
 
 ```java
 protected void onLayout(boolean changed,int l,int t,int r,int b);

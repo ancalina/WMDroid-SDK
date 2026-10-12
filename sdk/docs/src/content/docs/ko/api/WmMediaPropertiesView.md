@@ -46,7 +46,7 @@ protected void onVisibilityChanged(View changed,int visibility)
 protected void onFocusChanged(boolean focus,int direction,Rect previous)
 ```
 
-활성 상태·owner 명령 허용·modifier 없음 조건에서 DPAD 위/아래는 레이블/값별로 선택 이동하고 화면 밖 항목을 스크롤한다. 처리한 키는 true, 나머지는 상위 View에 전달. 포커스 변경은 현재 필드 표시를 다시 그린다.
+활성 상태, owner 명령 허용, modifier 없음 조건에서 DPAD 위/아래는 레이블/값별로 선택 이동하고 화면 밖 항목을 스크롤한다. 처리한 키는 true, 나머지는 상위 View에 전달. 포커스 변경은 현재 필드 표시를 다시 그린다.
 
 ## Style
 
@@ -55,6 +55,6 @@ public void onWmLanguageChanged(String value)
 public void onWmRestyle(Typeface regular,Typeface bold,int selection,int face)
 ```
 
-언어 변경은 메타데이터 레이블만 갱신. 재스타일은 글꼴·선택 색·흰색에서 face 색으로 가는 배경에 적용한다.
+언어 변경은 메타데이터 레이블만 갱신. 재스타일은 글꼴, 선택 색, 흰색에서 face 색으로 가는 배경에 적용한다.
 
 소스: `sdk/src/main/java/me/ancal/wmdroid/sdk/WmMediaPropertiesView.java`

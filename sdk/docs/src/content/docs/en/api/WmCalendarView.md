@@ -404,7 +404,7 @@ An all-day record in the same column stops text-mode timed-neighbor search, matc
 
 Civil means year/month/day/hour/minute after timezone conversion. Fresh native nodes are newly created original placement nodes; stale geometry means coordinates retained from reused nodes.
 
-[Time range](/en/api/wmcalendarview/#settimeselection) · [Event](/en/api/wmcalendarview/#event) · [WeekNavigation](/en/api/wmcalendarview/#captureweeknavigation--restoreweeknavigation)
+[Time range](/en/api/wmcalendarview/#settimeselection), [Event](/en/api/wmcalendarview/#event), [WeekNavigation](/en/api/wmcalendarview/#captureweeknavigation--restoreweeknavigation)
 
 ## Event
 

@@ -8,7 +8,7 @@ slug: ko/api/wmpwidocument
 public final class WmPwiDocument
 ```
 
-일반 텍스트 저장형과 복구된 binary PWI 텍스트 record를 읽는 불변 모델. 원본 byte 보존·텍스트 투영·서식/저장 cache 조회를 제공한다. 편집기나 일반 PWI writer는 아니다.
+일반 텍스트 저장형과 복구된 binary PWI 텍스트 record를 읽는 불변 모델. 원본 byte 보존, 텍스트 투영, 서식/저장 cache 조회를 제공한다. 편집기나 일반 PWI writer는 아니다.
 
 ## read
 
@@ -16,7 +16,7 @@ public final class WmPwiDocument
 public static WmPwiDocument read(byte[] input, Charset plainTextCharset) throws IOException
 ```
 
-입력 배열 복사. input/charset null은 `IllegalArgumentException`. `{\pwi`로 시작하면 지원 binary profile 검증·파싱; 그렇지 않으면 지정 charset으로 strict decode. charset은 일반 저장형의 원래 기기 code page이며 binary의 UTF-16 토큰에는 적용하지 않는다. `{\rtf`/`{\pwd`는 `IOException`. 잘린 데이터·미지원 header/record 순서·객체·참조/count 불일치·남은 record·decode 오류도 IOException. 미지원 구조를 평문으로 조용히 변환하지 않는다.
+입력 배열 복사. input/charset null은 `IllegalArgumentException`. `{\pwi`로 시작하면 지원 binary profile 검증, 파싱; 그렇지 않으면 지정 charset으로 strict decode. charset은 일반 저장형의 원래 기기 code page이며 binary의 UTF-16 토큰에는 적용하지 않는다. `{\rtf`/`{\pwd`는 `IOException`. 잘린 데이터, 미지원 header/record 순서, 객체, 참조/count 불일치, 남은 record, decode 오류도 IOException. 미지원 구조를 평문으로 조용히 변환하지 않는다.
 
 ## Content
 
@@ -43,7 +43,7 @@ public final int id, family, charset, pitch;
 public final String faceName;
 ```
 
-SavedView는 문서에 저장된 signed scale과 unsigned mode. 런타임 설정이 덮을 수 있으며 DPI/extendedBreaks를 포함하지 않는다. Font는 저장 메타데이터; id·family·charset·pitch는 native 값, faceName은 NUL 전까지 최대 31 UTF-16 코드 단위. 실제 font 파일·Typeface 생성/대체는 수행하지 않는다. 두 타입은 read 결과로만 얻는다.
+SavedView는 문서에 저장된 signed scale과 unsigned mode. 런타임 설정이 덮을 수 있으며 DPI/extendedBreaks를 포함하지 않는다. Font는 저장 메타데이터; id, family, charset, pitch는 native 값, faceName은 NUL 전까지 최대 31 UTF-16 코드 단위. 실제 font 파일, Typeface 생성/대체는 수행하지 않는다. 두 타입은 read 결과로만 얻는다.
 
 ## Font/default/color resolution
 

@@ -24,16 +24,16 @@ public WmTabDrawable(boolean selected,int face);
 public void draw(Canvas c);
 ```
 
-현재 bounds의 왼쪽·위쪽으로 Canvas를 이동하여 그린다. 아래 좌표는 bounds 내부 논리 픽셀이다.
+현재 bounds의 왼쪽, 위쪽으로 Canvas를 이동하여 그린다. 아래 좌표는 bounds 내부 논리 픽셀이다.
 
 | 상태 | 배경 | 검은 경계 |
 | --- | --- | --- |
 | 선택 | y=`0`부터 높이 전체 | 좌우 너비 `2`, y=`0`부터 |
-| 비선택 | y=`1`부터 높이 전체 | 위쪽 y=`1`·높이 `2`, 좌우 너비 `2`, y=`3`부터 |
+| 비선택 | y=`1`부터 높이 전체 | 위쪽 y=`1`, 높이 `2`, 좌우 너비 `2`, y=`3`부터 |
 
 선택 탭은 위쪽 경계를 생략하여 본문의 흰 배경과 이어진다. 두 상태 모두 아래쪽 경계를 그리지 않는다. 비선택 탭의 첫 `1`픽셀 줄은 그대로 남는다. 정상 반환 시 Canvas 상태를 복원한다. bounds는 호출자가 설정한다.
 
-## setAlpha · setColorFilter
+## setAlpha, setColorFilter
 
 ```java
 public void setAlpha(int a);

@@ -8,9 +8,9 @@ slug: ko/api/wmphonekeypad
 public final class WmPhoneKeypad extends FrameLayout implements WmControls.RestyleListener,WmControls.LanguageListener
 ```
 
-4×4 전화 키패드. 숫자 입력과 지우기·단축 다이얼·통화 기록·통화 버튼을 소유 앱 콜백에 전달한다.
+4×4 전화 키패드. 숫자 입력과 지우기, 단축 다이얼, 통화 기록, 통화 버튼을 소유 앱 콜백에 전달한다.
 
-## 생성자·배치
+## 생성자, 배치
 
 ```java
 public static final int WIDTH=480,HEIGHT=294;

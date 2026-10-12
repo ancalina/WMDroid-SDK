@@ -53,7 +53,7 @@ public void inputMethods(View owner);
 
 `owner` is an editor or a UI root containing editors. Editor selection and button visibility follow `WmSipButton`. The owner must remove custom center children.
 
-## setCommands · setCommand
+## setCommands, setCommand
 
 ```java
 public void setCommands(String left,Runnable leftAction,String right,Runnable rightAction);
@@ -76,7 +76,7 @@ Binds a menu command that activates on DOWN. Arguments, labels, disabling, and c
 
 The owner creates, shows, and dismisses the menu in `action`.
 
-## restyle · onWmRestyle
+## restyle, onWmRestyle
 
 ```java
 public void restyle(Typeface font,WmBar paint);

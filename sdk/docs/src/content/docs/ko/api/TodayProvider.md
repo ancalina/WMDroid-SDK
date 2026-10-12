@@ -26,9 +26,9 @@ Manifest의 `android:authorities` 값을 반환합니다. 조회 URI와 변경 �
 protected abstract void fillRows(MatrixCursor rows,String language);
 ```
 
-제공된 cursor에 [v1 열 순서](/ko/api/todaycontract/#columns)의 행을 추가합니다. `language`는 provider 앱에 포함된 언어 파일의 정규화된 태그입니다. 지역 태그가 없으면 가장 가까운 상위 언어 파일을 사용합니다. 잘못되었거나 지원하지 않는 태그는 `"ko"`입니다. 기본 클래스는 행 개수·문자열 길이·ID 중복을 검증하지 않습니다. [호스트 제한](/ko/api/todaycontract/#row-limits)을 지키세요.
+제공된 cursor에 [v1 열 순서](/ko/api/todaycontract/#columns)의 행을 추가합니다. `language`는 provider 앱에 포함된 언어 파일의 정규화된 태그입니다. 지역 태그가 없으면 가장 가까운 상위 언어 파일을 사용합니다. 잘못되었거나 지원하지 않는 태그는 `"ko"`입니다. 기본 클래스는 행 개수, 문자열 길이, ID 중복을 검증하지 않습니다. [호스트 제한](/ko/api/todaycontract/#row-limits)을 지키세요.
 
-`query`·`call`과 이들이 호출하는 hook은 UI thread를 가정하면 안 됩니다. 공유 캐시를 동시 호출에 안전하게 관리하고 네트워크 응답을 기다리지 마세요. hook 예외는 호출자에게 전파됩니다. 반환 후 cursor를 보관하거나 수정하지 마세요.
+`query`, `call`과 이들이 호출하는 hook은 UI thread를 가정하면 안 됩니다. 공유 캐시를 동시 호출에 안전하게 관리하고 네트워크 응답을 기다리지 마세요. hook 예외는 호출자에게 전파됩니다. 반환 후 cursor를 보관하거나 수정하지 마세요.
 
 ## query
 
@@ -36,7 +36,7 @@ protected abstract void fillRows(MatrixCursor rows,String language);
 public final Cursor query(Uri uri,String[] projection,String selection,String[] args,String order);
 ```
 
-`uri`는 [rows URI](/ko/api/todaycontract/#rows)여야 합니다. 비교 시 query parameter만 제거합니다. fragment는 허용하지 않습니다. `selection`·`args`·`order`는 모두 `null`이어야 합니다. 조건을 어기면 `IllegalArgumentException("Unsupported Today query")`입니다.
+`uri`는 [rows URI](/ko/api/todaycontract/#rows)여야 합니다. 비교 시 query parameter만 제거합니다. fragment는 허용하지 않습니다. `selection`, `args`, `order`는 모두 `null`이어야 합니다. 조건을 어기면 `IllegalArgumentException("Unsupported Today query")`입니다.
 
 `projection`을 무시하고 전체 `COLUMNS`를 가진 새 `MatrixCursor`에 `fillRows`를 호출합니다. `language` parameter는 위 언어 태그 정규화를 따릅니다. 예를 들어 앱에 `en`만 있고 `en-gb`가 없으면 `en-GB`는 `en`으로 바뀝니다. 다른 query parameter는 행 선택에 사용하지 않습니다.
 
@@ -52,7 +52,7 @@ protected TodayContract.Widget createWidget(String id,Bundle options);
 
 `options`는 호출별 새 Bundle입니다. 아래 정규화된 값만 들어갑니다. 폰트 경로는 파일 접근 권한을 부여하지 않습니다. [공유 리소스](/ko/api/wmresources/)를 사용하려면 동기화 완료 전에도 fallback으로 그릴 수 있어야 합니다.
 
-| 옵션 | 정규화·기본값 |
+| 옵션 | 정규화, 기본값 |
 | --- | --- |
 | `width` | 입력과 무관하게 480 논리 픽셀. |
 | `pixel_width` | 480–1440 physical pixels로 제한. 기본 480. |
@@ -90,7 +90,7 @@ public boolean onCreate();
 
 현재 리소스 revision을 기록하고 비동기 동기화를 요청한 뒤 `true`를 반환합니다. override하면 superclass를 호출하세요.
 
-provider 인스턴스는 런처 `WmShell.STATE`를 관찰합니다. `onCreate`·`query`·`call`·state 변경은 공용 단일 worker에 리소스 동기화를 요청합니다. 진행 중 중복 요청은 후속 요청 하나로 합칩니다. 완료 시 revision이 바뀌고 아직 중지되지 않았으면 `changed()`를 호출합니다. 런처 패키지 자체는 이 동기화를 건너뜁니다.
+provider 인스턴스는 런처 `WmShell.STATE`를 관찰합니다. `onCreate`, `query`, `call`, state 변경은 공용 단일 worker에 리소스 동기화를 요청합니다. 진행 중 중복 요청은 후속 요청 하나로 합칩니다. 완료 시 revision이 바뀌고 아직 중지되지 않았으면 `changed()`를 호출합니다. 런처 패키지 자체는 이 동기화를 건너뜁니다.
 
 observer 등록 실패(`RuntimeException`)와 동기화의 `IOException`은 무시합니다. 기존 로컬 리소스/fallback을 사용하세요. 다른 unchecked 예외까지 처리하는 계약은 아닙니다.
 
@@ -110,7 +110,7 @@ public final String getType(Uri uri);
 
 URI 검증 없이 `"vnd.android.cursor.dir/vnd.me.ancal.wmdroid.module.v1"`을 반환합니다. 조회 가능 여부는 `query`에서 검증합니다.
 
-## insert · update · delete
+## insert, update, delete
 
 ```java
 public final Uri insert(Uri u,ContentValues v);

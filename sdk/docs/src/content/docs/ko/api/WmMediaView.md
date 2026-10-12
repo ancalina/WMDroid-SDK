@@ -8,7 +8,7 @@ slug: ko/api/wmmediaview
 public final class WmMediaView extends FrameLayout implements WmControls.RestyleListener,WmControls.LanguageListener,WmControls.BackHandler
 ```
 
-Android MediaPlayer 기반 오디오/비디오 클라이언트. 재생 큐·지금 재생·라이브러리·속성 패널을 묶는다. 소유 앱이 소스 선택, 라이브러리 데이터, 셸 메뉴를 제공한다. 지원 형식은 기기의 Android decoder에 따른다. 영상은 TextureView를 사용하므로 호스트 창의 하드웨어 가속이 필요하다.
+Android MediaPlayer 기반 오디오/비디오 클라이언트. 재생 큐, 지금 재생, 라이브러리, 속성 패널을 묶는다. 소유 앱이 소스 선택, 라이브러리 데이터, 셸 메뉴를 제공한다. 지원 형식은 기기의 Android decoder에 따른다. 영상은 TextureView를 사용하므로 호스트 창의 하드웨어 가속이 필요하다.
 
 ## 생성자
 
@@ -17,7 +17,7 @@ public WmMediaView(Context context,Typeface font)
 public WmMediaView(Context context,Typeface font,Typeface bold)
 ```
 
-두 인수 생성자는 font에서 bold를 만든다. UI 스레드에서 생성/조작한다. 초기 상태 EMPTY, 볼륨 70%, mute/repeat/shuffle=false. 내부 직렬 worker는 소스 설정·비트맵·메타데이터 읽기·decoder 해제에 사용한다. 소유 앱은 content 읽기 권한과 HTTP(S)용 INTERNET 권한을 확보해야 한다. 비트맵 스킨은 리소스팩에서 읽고 없으면 색/기호로 표시한다. 스킨·아이콘 결과는 main Looper Handler로 전달해 window에 붙기 전에도 적용한다. CLOSED 뒤 도착한 비트맵은 recycle한다.
+두 인수 생성자는 font에서 bold를 만든다. UI 스레드에서 생성/조작한다. 초기 상태 EMPTY, 볼륨 70%, mute/repeat/shuffle=false. 내부 직렬 worker는 소스 설정, 비트맵, 메타데이터 읽기, decoder 해제에 사용한다. 소유 앱은 content 읽기 권한과 HTTP(S)용 INTERNET 권한을 확보해야 한다. 비트맵 스킨은 리소스팩에서 읽고 없으면 색/기호로 표시한다. 스킨, 아이콘 결과는 main Looper Handler로 전달해 window에 붙기 전에도 적용한다. CLOSED 뒤 도착한 비트맵은 recycle한다.
 
 ## State and Listener
 
@@ -60,7 +60,7 @@ public void stop()
 public void seekTo(int millis)
 ```
 
-play는 PREPARING에서 준비 후 재생 요청을 저장하고, 준비된 상태에서는 audio focus 확보 후 시작. focus 거부면 시작하지 않는다. ENDED에서 play는 0으로 돌아간다. pause는 준비 후 자동 재생 요청도 해제하며 PLAYING이면 PAUSED 전환·audio focus 반납. toggle은 PLAYING이면 pause, 아니면 play. stop은 준비된 소스를 유지한 채 0으로 이동해 READY. seekTo는 준비된 상태에서 0..duration ms로 clamp; ENDED이면 PAUSED. stop은 준비 후 자동 재생 요청을 해제한다. PREPARING에서 호출하면 준비는 계속되고 완료 후 READY에서 대기한다. 준비되지 않은 상태의 seekTo는 무동작. 영구/일시 audio focus 손실 모두 pause한다.
+play는 PREPARING에서 준비 후 재생 요청을 저장하고, 준비된 상태에서는 audio focus 확보 후 시작. focus 거부면 시작하지 않는다. ENDED에서 play는 0으로 돌아간다. pause는 준비 후 자동 재생 요청도 해제하며 PLAYING이면 PAUSED 전환, audio focus 반납. toggle은 PLAYING이면 pause, 아니면 play. stop은 준비된 소스를 유지한 채 0으로 이동해 READY. seekTo는 준비된 상태에서 0..duration ms로 clamp; ENDED이면 PAUSED. stop은 준비 후 자동 재생 요청을 해제한다. PREPARING에서 호출하면 준비는 계속되고 완료 후 READY에서 대기한다. 준비되지 않은 상태의 seekTo는 무동작. 영구/일시 audio focus 손실 모두 pause한다.
 
 ## Next, shuffle, repeat
 
@@ -110,7 +110,7 @@ public void showProperties(int index)
 public boolean back()
 ```
 
-selectedIndex/selectPlaylist는 지금 재생 목록의 선택이며 currentIndex와 별개. playSelection은 선택을 재생하고 목록 숨김. UP/DOWN/REMOVE/PLAY는 내부 처리, 다른 지금 재생 명령과 라이브러리 명령은 owner listener에 전달; null 해제. setPlaylistSaveEnabled는 무동작 호환 API. showLibrary(true)는 목록 숨김, showPlaylist는 라이브러리 숨김; 둘 다 속성 패널 닫기. showProperties는 유효 큐 인덱스의 제목·URI를 먼저 표시하며 현재 항목의 양수 duration을 알고 있으면 길이도 표시한다. content URI만 worker에서 추가 메타데이터를 읽고 HTTP(S)는 별도 다운로드 없이 기본 정보만 표시한다. 읽을 수 없는 개별 정보는 빠질 수 있다. `WmMediaPropertiesView.setValues`는 호출자가 문자열을 직접 공급하는 API이다; main Looper Handler에서 속성 패널이 보이고 요청 generation이 일치할 때만 결과를 적용한다. CLOSED 뒤 또는 패널 요청이 바뀐 뒤 결과는 무시한다. underlying panel/decoder는 유지. Back은 입력 dialog, 속성, 라이브러리, 목록, fullscreen 순서로 닫고 처리한 경우 true. CLOSED의 show 패널 호출은 무동작.
+selectedIndex/selectPlaylist는 지금 재생 목록의 선택이며 currentIndex와 별개. playSelection은 선택을 재생하고 목록 숨김. UP/DOWN/REMOVE/PLAY는 내부 처리, 다른 지금 재생 명령과 라이브러리 명령은 owner listener에 전달; null 해제. setPlaylistSaveEnabled는 무동작 호환 API. showLibrary(true)는 목록 숨김, showPlaylist는 라이브러리 숨김; 둘 다 속성 패널 닫기. showProperties는 유효 큐 인덱스의 제목, URI를 먼저 표시하며 현재 항목의 양수 duration을 알고 있으면 길이도 표시한다. content URI만 worker에서 추가 메타데이터를 읽고 HTTP(S)는 별도 다운로드 없이 기본 정보만 표시한다. 읽을 수 없는 개별 정보는 빠질 수 있다. `WmMediaPropertiesView.setValues`는 호출자가 문자열을 직접 공급하는 API이다; main Looper Handler에서 속성 패널이 보이고 요청 generation이 일치할 때만 결과를 적용한다. CLOSED 뒤 또는 패널 요청이 바뀐 뒤 결과는 무시한다. underlying panel/decoder는 유지. Back은 입력 dialog, 속성, 라이브러리, 목록, fullscreen 순서로 닫고 처리한 경우 true. CLOSED의 show 패널 호출은 무동작.
 
 ## Lifetime and geometry
 
@@ -121,7 +121,7 @@ protected void onMeasure(int width,int height)
 protected void onLayout(boolean changed,int l,int t,int r,int b)
 ```
 
-detach는 pause만 수행한다. 영구 폐기 시 close 필수: CLOSED 전환·콜백 제거·아이콘/스킨/Surface 해제·audio focus 반납·직렬 worker에 decoder 해제 예약 후 shutdown. close 반복 호출 가능. 종료 후 뷰/패널을 재사용하지 않는다. 기본 player client는 480×536 논리 픽셀; 좁은 공간에서는 종횡비를 유지해 축소하고 추가 높이는 화면 중간에 반영한다.
+detach는 pause만 수행한다. 영구 폐기 시 close 필수: CLOSED 전환, 콜백 제거, 아이콘/스킨/Surface 해제, audio focus 반납, 직렬 worker에 decoder 해제 예약 후 shutdown. close 반복 호출 가능. 종료 후 뷰/패널을 재사용하지 않는다. 기본 player client는 480×536 논리 픽셀; 좁은 공간에서는 종횡비를 유지해 축소하고 추가 높이는 화면 중간에 반영한다.
 
 ## Style
 
@@ -130,6 +130,6 @@ public void onWmRestyle(Typeface regular,Typeface bold,int selection,int tabColo
 public void onWmLanguageChanged(String value)
 ```
 
-재스타일은 player의 본문/제목 글꼴 적용. 언어 변경은 player 버튼·재생 위치·상태 캡션에 적용한다. 라이브러리/목록/속성 자식의 재스타일은 공통 `WmControls.restyleTree` 경로에서 처리한다.
+재스타일은 player의 본문/제목 글꼴 적용. 언어 변경은 player 버튼, 재생 위치, 상태 캡션에 적용한다. 라이브러리/목록/속성 자식의 재스타일은 공통 `WmControls.restyleTree` 경로에서 처리한다.
 
 소스: `sdk/src/main/java/me/ancal/wmdroid/sdk/WmMediaView.java`

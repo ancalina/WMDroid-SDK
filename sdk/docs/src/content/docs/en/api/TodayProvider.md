@@ -110,7 +110,7 @@ public final String getType(Uri uri);
 
 Return `"vnd.android.cursor.dir/vnd.me.ancal.wmdroid.module.v1"` without URI validation. `query` validates whether a URI is supported.
 
-## insert · update · delete
+## insert, update, delete
 
 ```java
 public final Uri insert(Uri u,ContentValues v);

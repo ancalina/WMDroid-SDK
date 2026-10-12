@@ -30,7 +30,7 @@ public int scale = 1000;
 public enum Role { MENU, POPUP, FORM, GRID, CALENDAR }
 ```
 
-## 생성자 · readOptions
+## 생성자, readOptions
 
 ```text
 public WmPaint(Context context,boolean delayAlreadyServed);
@@ -38,9 +38,9 @@ public WmPaint(Context context,boolean delayAlreadyServed,Role role);
 protected Options readOptions();
 ```
 
-생성·변경은 UI thread에서 수행하세요. 기본 role은 `FORM`입니다. role을 지정할 때 null을 전달하지 마세요. `delayAlreadyServed`는 attach 시 초기 대기 시간을 생략합니다. `readOptions()`는 현재 `WmShell.State`를 읽습니다. subclass는 이 hook에서 다른 Options를 반환할 수 있습니다.
+생성, 변경은 UI thread에서 수행하세요. 기본 role은 `FORM`입니다. role을 지정할 때 null을 전달하지 마세요. `delayAlreadyServed`는 attach 시 초기 대기 시간을 생략합니다. `readOptions()`는 현재 `WmShell.State`를 읽습니다. subclass는 이 hook에서 다른 Options를 반환할 수 있습니다.
 
-## Options · Role
+## Options, Role
 
 ```text
 public static Options from(WmShell.State state);
@@ -59,9 +59,9 @@ public void replay(View client);
 public void replay(View client,boolean delayServed);
 ```
 
-인자 없는 호출은 전체 영역을 다시 표시합니다. `delayServed=true`는 초기 delay를 생략합니다. client 인자는 이 컨테이너의 자손 View여야 합니다. null·자신·외부 View는 `IllegalArgumentException`입니다. client 밖은 유지하고 client 안만 다시 표시합니다. window에 연결되지 않았거나 보이지 않으면 실행하지 않습니다. layout을 기다린 뒤 실제 clip 영역을 사용합니다. disabled이면 표시를 지연하지 않습니다.
+인자 없는 호출은 전체 영역을 다시 표시합니다. `delayServed=true`는 초기 delay를 생략합니다. client 인자는 이 컨테이너의 자손 View여야 합니다. null, 자신, 외부 View는 `IllegalArgumentException`입니다. client 밖은 유지하고 client 안만 다시 표시합니다. window에 연결되지 않았거나 보이지 않으면 실행하지 않습니다. layout을 기다린 뒤 실제 clip 영역을 사용합니다. disabled이면 표시를 지연하지 않습니다.
 
-## isActive · cancel · stopReplay
+## isActive, cancel, stopReplay
 
 ```text
 public boolean isActive();
@@ -69,9 +69,9 @@ public static void stopReplay(View root);
 public void cancel();
 ```
 
-`isActive()`는 표시 진행 중인지 반환합니다. `cancel()`은 예약 callback·가려진 영역·gesture 차단을 해제합니다. `stopReplay(root)`는 root와 자손의 활성 표시를 완료합니다. 진행 중이던 touch는 UP 또는 CANCEL까지 차단합니다.
+`isActive()`는 표시 진행 중인지 반환합니다. `cancel()`은 예약 callback, 가려진 영역, gesture 차단을 해제합니다. `stopReplay(root)`는 root와 자손의 활성 표시를 완료합니다. 진행 중이던 touch는 UP 또는 CANCEL까지 차단합니다.
 
-## lifecycle · drawing · touch
+## lifecycle, drawing, touch
 
 ```text
 protected void onAttachedToWindow();
@@ -83,4 +83,4 @@ protected void dispatchDraw(Canvas canvas);
 public boolean dispatchTouchEvent(MotionEvent event);
 ```
 
-attach 시 생성자 설정으로 표시를 시작합니다. detach 또는 숨김 상태는 예약 작업을 취소합니다. 진행 중 touch는 소비합니다. 이미 자식으로 전달한 gesture 중 표시를 시작하면 자식에게 CANCEL을 보내고 남은 gesture를 소비합니다. lifecycle·drawing·touch override는 superclass를 호출해 이 상태를 유지하세요.
+attach 시 생성자 설정으로 표시를 시작합니다. detach 또는 숨김 상태는 예약 작업을 취소합니다. 진행 중 touch는 소비합니다. 이미 자식으로 전달한 gesture 중 표시를 시작하면 자식에게 CANCEL을 보내고 남은 gesture를 소비합니다. lifecycle, drawing, touch override는 superclass를 호출해 이 상태를 유지하세요.

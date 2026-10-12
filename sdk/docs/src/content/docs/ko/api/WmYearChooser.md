@@ -58,7 +58,7 @@ public EditText input();
 public void setLocale(Locale locale);
 ```
 
-제목·라벨·오류·명령을 갱신한다. 입력 초안은 유지한다. null은 `IllegalArgumentException`.
+제목, 라벨, 오류, 명령을 갱신한다. 입력 초안은 유지한다. null은 `IllegalArgumentException`.
 
 ### onWmLanguageChanged
 
@@ -74,7 +74,7 @@ public void onWmLanguageChanged(String language);
 public boolean submit();
 ```
 
-유효1900..2999이면 완료 flag 설정·키보드 숨김·chosen 호출 후 true. 잘못된 입력은 오류 표시/전체선택 후 false. 이미 완료했으면 false.
+유효1900..2999이면 완료 flag 설정, 키보드 숨김, chosen 호출 후 true. 잘못된 입력은 오류 표시/전체선택 후 false. 이미 완료했으면 false.
 
 ### cancel
 
@@ -82,7 +82,7 @@ public boolean submit();
 public void cancel();
 ```
 
-미완료이면 완료 flag 설정·키보드 숨김·cancel callback. 이후 호출은 무시한다.
+미완료이면 완료 flag 설정, 키보드 숨김, cancel callback. 이후 호출은 무시한다.
 
 ### back
 
@@ -114,7 +114,7 @@ pending 키보드 요청을 제거하고 현재 키보드를 숨긴다.
 public void onWmRestyle(Typeface regular,Typeface bold,int selection,int tabColor);
 ```
 
-파생 배경색만 갱신한다. 입력 원문·선택은 유지한다. 자식 글꼴은 WmControls.restyleTree로 갱신한다.
+파생 배경색만 갱신한다. 입력 원문, 선택은 유지한다. 자식 글꼴은 WmControls.restyleTree로 갱신한다.
 
 ## Listener
 
@@ -128,7 +128,7 @@ public interface Listener
 void chosen(int year);
 ```
 
-1900..2999의 유효 연도로 submit()이 성공할 때 해당 호출 안에서 동기로 실행합니다. 완료 상태 설정·키보드 숨김 뒤 호출하며 취소 시에는 호출하지 않습니다. 소유자가 다이얼로그 View를 제거합니다.
+1900..2999의 유효 연도로 submit()이 성공할 때 해당 호출 안에서 동기로 실행합니다. 완료 상태 설정, 키보드 숨김 뒤 호출하며 취소 시에는 호출하지 않습니다. 소유자가 다이얼로그 View를 제거합니다.
 
 ### cancel
 

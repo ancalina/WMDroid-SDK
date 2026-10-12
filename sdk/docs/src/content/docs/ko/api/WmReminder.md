@@ -47,7 +47,7 @@ public int minutes();
 public WmReminder withEnabled(boolean enabled);
 ```
 
-수량·단위를 유지한 새 값을 반환한다.
+수량, 단위를 유지한 새 값을 반환한다.
 
 ### withUnit
 
@@ -55,7 +55,7 @@ public WmReminder withEnabled(boolean enabled);
 public WmReminder withUnit(int unit);
 ```
 
-수량·사용 여부를 유지한 새 값을 반환한다. 총 분 수 보존 변환이 아니다. 잘못된 단위는 `IllegalArgumentException`.
+수량, 사용 여부를 유지한 새 값을 반환한다. 총 분 수 보존 변환이 아니다. 잘못된 단위는 `IllegalArgumentException`.
 
 ### fromMinutes
 

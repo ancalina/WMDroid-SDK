@@ -103,7 +103,7 @@ Dragging adds `round(deltaY*max(0,range−extent)/thumbTravel)` to the starting 
 
 Arrows cancel on leaving their button area or the horizontal `24`-pixel extension. Horizontal departure alone does not cancel thumb dragging. When the tracked pointer lifts, dragging continues with another pointer; other operations cancel. A missing pointer or CANCEL cancels. UP calls stop, then performClick, and returns true.
 
-## stop · setEnabled · onDetachedFromWindow
+## stop, setEnabled, onDetachedFromWindow
 
 ```java
 public void stop();
@@ -115,7 +115,7 @@ protected void onDetachedFromWindow();
 
 `setEnabled(false)` and detachment call stop. Self, ancestor, and window hiding also stop through the hooks below. Showing again does not resume canceled repetition or dragging. A remaining UP from the pre-hide gesture does not page, but the existing UP path can still call performClick.
 
-## onVisibilityChanged · onWindowVisibilityChanged
+## onVisibilityChanged, onWindowVisibilityChanged
 
 ```java
 protected void onVisibilityChanged(View changedView,int visibility);
@@ -124,7 +124,7 @@ protected void onWindowVisibilityChanged(int visibility);
 
 Calls each superclass hook, then `stop()` when `visibility != VISIBLE`. Self/ancestor changes to INVISIBLE or GONE and non-VISIBLE window changes cancel scheduled repetition, pressed state, and the tracked pointer. Becoming VISIBLE does not restore the previous gesture.
 
-## onKeyDown · onKeyUp
+## onKeyDown, onKeyUp
 
 ```java
 public boolean onKeyDown(int key,KeyEvent event);
@@ -137,7 +137,7 @@ Handles supported keys only when enabled and without modifiers; other events del
 | --- | --- |
 | Home / End | `0` / `max(0,range−extent)` |
 | Page Up / Down | `−pageStep` / `+pageStep` |
-| Up·Left / Down·Right | `−lineStep` / `+lineStep` |
+| Up, Left / Down, Right | `−lineStep` / `+lineStep` |
 
 Consumes enabled, unmodified UP for supported keys. Line/page steps use a long intermediate sum to clamp offset to the range, then call Host.scrollBy. No callback runs when already at the target offset.
 

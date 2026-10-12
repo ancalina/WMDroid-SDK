@@ -8,7 +8,7 @@ slug: ko/api/wmcalendarpicker
 public final class WmCalendarPicker extends LinearLayout implements WmControls.RestyleListener,WmControls.BackHandler
 ```
 
-월 제목·달력·월 목록·인라인 연도 편집을 결합한 날짜 드롭다운. 소유자가 팝업의 배치와 해제를 수행한다.
+월 제목, 달력, 월 목록, 인라인 연도 편집을 결합한 날짜 드롭다운. 소유자가 팝업의 배치와 해제를 수행한다.
 
 ### 생성자
 
@@ -18,7 +18,7 @@ public WmCalendarPicker(Context context,Typeface regular,Typeface bold,Locale lo
 public WmCalendarPicker(Context context,Typeface regular,Typeface bold,Locale locale,int year,int month,int day,int selection,OnDateListener listener,WmDateTimeField.Value minimum,WmDateTimeField.Value maximum);
 ```
 
-Locale과 선택 listener는 필수. 초기 날짜는 경계 안이어야 한다. 기본1900-01-01..2999-12-31; 마지막 overload는 시간 무시한 full-date 경계를 받는다. 잘못된 날짜/경계/null Locale·listener는 `IllegalArgumentException`. 한 face overload는 bold를 파생한다.
+Locale과 선택 listener는 필수. 초기 날짜는 경계 안이어야 한다. 기본1900-01-01..2999-12-31; 마지막 overload는 시간 무시한 full-date 경계를 받는다. 잘못된 날짜/경계/null Locale, listener는 `IllegalArgumentException`. 한 face overload는 bold를 파생한다.
 
 ### naturalSize
 
@@ -26,9 +26,9 @@ Locale과 선택 listener는 필수. 초기 날짜는 경계 안이어야 한다
 public android.graphics.Point naturalSize();
 ```
 
-선호 client 크기의 새 Point를 반환한다. `x`·`y`는 SDK 논리 픽셀이며 소유자의 외부 테두리는 제외한다. 배치 전에 사용 가능한 영역으로 제한해야 한다.
+선호 client 크기의 새 Point를 반환한다. `x`, `y`는 SDK 논리 픽셀이며 소유자의 외부 테두리는 제외한다. 배치 전에 사용 가능한 영역으로 제한해야 한다.
 
-현재 bold 글꼴의 Android 텍스트 지표와 Locale의 월·요일·footer 문구로 계산한다. 주 번호 표시와 None footer 유무도 반영한다. 원본 192DPI 크기 공식을 Android 지표로 적용한 값이며, 원본 GDI 픽셀과 동일함을 보장하지 않는다.
+현재 bold 글꼴의 Android 텍스트 지표와 Locale의 월, 요일, footer 문구로 계산한다. 주 번호 표시와 None footer 유무도 반영한다. 원본 192DPI 크기 공식을 Android 지표로 적용한 값이며, 원본 GDI 픽셀과 동일함을 보장하지 않는다.
 
 ### onMeasure
 
@@ -60,7 +60,7 @@ Android가 호출하는 터치 전달 메서드입니다. 인라인 연도 편�
 public Bundle saveInteractionState();
 ```
 
-schema1로 열린 month/year 상태, 스크롤, 연도 원문·선택을 반환한다. 현재 날짜는 date()로 따로 보존한다.
+schema1로 열린 month/year 상태, 스크롤, 연도 원문, 선택을 반환한다. 현재 날짜는 date()로 따로 보존한다.
 
 ### validateInteractionState
 
@@ -84,7 +84,7 @@ public void restoreInteractionState(Bundle state);
 public void setOnDateChangeListener(OnDateListener listener);
 ```
 
-월·연도·좌우 탐색, 날짜 탭, [달력 키보드 이동](/ko/api/wmmonthcalendar/#onkeydown)으로 날짜가 달라질 때 통지한다. 격자 변경은 현재 날짜와 헤더를 먼저 갱신한다. 날짜 탭의 변경 알림은 constructor 확인 callback보다 먼저 실행하며, 같은 날짜 탭은 확인 callback만 실행한다. 키보드 이동은 확인 callback을 호출하지 않는다. null로 해제한다.
+월, 연도, 좌우 탐색, 날짜 탭, [달력 키보드 이동](/ko/api/wmmonthcalendar/#onkeydown)으로 날짜가 달라질 때 통지한다. 격자 변경은 현재 날짜와 헤더를 먼저 갱신한다. 날짜 탭의 변경 알림은 constructor 확인 callback보다 먼저 실행하며, 같은 날짜 탭은 확인 callback만 실행한다. 키보드 이동은 확인 callback을 호출하지 않는다. null로 해제한다.
 
 ### setOnNoneListener
 
@@ -124,7 +124,7 @@ public int[] date();
 public void setLocale(Locale locale);
 ```
 
-제목·달력 문구·열린 월 목록 또는 연도 편집 문구를 바꾼다. 월 목록 스크롤을 보존한다. null은 `IllegalArgumentException`.
+제목, 달력 문구, 열린 월 목록 또는 연도 편집 문구를 바꾼다. 월 목록 스크롤을 보존한다. null은 `IllegalArgumentException`.
 
 ### onWmRestyle
 
@@ -132,7 +132,7 @@ public void setLocale(Locale locale);
 public void onWmRestyle(Typeface regular,Typeface bold,int selection,int tabColor);
 ```
 
-header·month·열린 선택 메뉴에 style을 전달하고 인라인 연도 입력의 위치를 갱신한다.
+header, month, 열린 선택 메뉴에 style을 전달하고 인라인 연도 입력의 위치를 갱신한다.
 
 ## OnDateListener
 
@@ -146,6 +146,6 @@ public interface OnDateListener
 void choose(int year,int month,int day);
 ```
 
-constructor listener는 날짜·Today footer 탭을 확정한다. 별도 change listener는 탐색·탭·키보드 이동으로 바뀐 날짜를 전달한다. 월은 1 기반이다.
+constructor listener는 날짜, Today footer 탭을 확정한다. 별도 change listener는 탐색, 탭, 키보드 이동으로 바뀐 날짜를 전달한다. 월은 1 기반이다.
 
 소스: `sdk/src/main/java/me/ancal/wmdroid/sdk/WmCalendarPicker.java`

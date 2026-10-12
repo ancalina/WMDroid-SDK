@@ -8,7 +8,7 @@ slug: ko/api/wmbrowserfolderform
 public final class WmBrowserFolderForm extends LinearLayout implements WmControls.LanguageListener
 ```
 
-즐겨찾기 폴더 이름 입력 폼. 폴더 생성·검증·저장은 소유 앱이 수행한다.
+즐겨찾기 폴더 이름 입력 폼. 폴더 생성, 검증, 저장은 소유 앱이 수행한다.
 
 ## 생성자
 

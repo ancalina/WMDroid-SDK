@@ -8,7 +8,7 @@ slug: ko/api/wmcontactsview
 public final class WmContactsView extends LinearLayout implements WmControls.RestyleListener,WmControls.LanguageListener
 ```
 
-검색·영문 첫 글자 그룹·연락처 목록을 표시한다. 데이터 공급과 연락처 열기는 소유 앱이 수행한다. 이름에 대한 대소문자 무시 부분 문자열 검색이며 입력 배열 순서를 유지한다.
+검색, 영문 첫 글자 그룹, 연락처 목록을 표시한다. 데이터 공급과 연락처 열기는 소유 앱이 수행한다. 이름에 대한 대소문자 무시 부분 문자열 검색이며 입력 배열 순서를 유지한다.
 
 ## Entry and Listener
 
@@ -41,7 +41,7 @@ public void setQuery(String query)
 public void setMessage(String authored)
 ```
 
-`setEntries`는 배열 복사, null 배열/항목·중복 키는 변경 전 `IllegalArgumentException`. 선택은 키로 유지하며 사라지면 null. 데이터 변경 후 기존 목록 스크롤 위치 복원. `search()`는 실제 입력 컨트롤. `query()`는 현재 텍스트; `setQuery`는 null 거부, 변경 시 필터링하고 맨 위로 스크롤. 선택은 검색 때문에 자동 해제되지 않으므로 `selected()`가 현재 검색에서 숨겨진 항목일 수 있다. `setMessage`에 non-null 문자열을 주면 목록 대신 소유 앱의 상태 메시지 표시; null은 데이터 화면 복원.
+`setEntries`는 배열 복사, null 배열/항목, 중복 키는 변경 전 `IllegalArgumentException`. 선택은 키로 유지하며 사라지면 null. 데이터 변경 후 기존 목록 스크롤 위치 복원. `search()`는 실제 입력 컨트롤. `query()`는 현재 텍스트; `setQuery`는 null 거부, 변경 시 필터링하고 맨 위로 스크롤. 선택은 검색 때문에 자동 해제되지 않으므로 `selected()`가 현재 검색에서 숨겨진 항목일 수 있다. `setMessage`에 non-null 문자열을 주면 목록 대신 소유 앱의 상태 메시지 표시; null은 데이터 화면 복원.
 
 ## Style
 

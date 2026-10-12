@@ -12,7 +12,7 @@ Places one logical window on a physical screen with uniform scaling.
 public class WmViewport extends ViewGroup
 ```
 
-## Constructor · setContent · content · addView
+## Constructor, setContent, content, addView
 
 ```text
 public final void setContent(View content);
@@ -23,7 +23,7 @@ public void addView(View child,int index,ViewGroup.LayoutParams params);
 
 Null content throws `IllegalArgumentException`. Replaces the previous child and applies a smoothing layer. The same View remains unchanged. content returns the current child or null. Adding a second child throws `IllegalStateException`. Detach Views from other parents first. All View changes use the main thread.
 
-## scalePercent · setScalePercent · getLogicalWidth · getLogicalHeight · getScale
+## scalePercent, setScalePercent, getLogicalWidth, getLogicalHeight, getScale
 
 ```text
 public final int getLogicalWidth();
@@ -35,7 +35,7 @@ public final int getLogicalHeight();
 
 Percent is clamped to 50–100 and defaults to 100. Logical width is round(480*100/percent). Physical scale is physical width/logical width; getScale returns 0 before physical width exists. Height uses the same scale and insets. getLogicalHeight returns the measured child height.
 
-## setTopInset · setBottomInset · getUsableHeight
+## setTopInset, setBottomInset, getUsableHeight
 
 ```text
 public final void setTopInset(int pixels);
@@ -45,7 +45,7 @@ public final void setBottomInset(int pixels);
 
 Insets use physical pixels; negative values become 0. usableHeight is height minus both insets, with a minimum of 0. Do not apply insets again during coordinate conversion.
 
-## applyDisplay · screenMode
+## applyDisplay, screenMode
 
 ```text
 public final void applyDisplay(Activity owner,int scale,String mode);
@@ -62,7 +62,7 @@ public final void observeImeInsets();
 
 API 30 or later uses ADJUST_NOTHING and IME insets. Earlier versions use ADJUST_RESIZE and visible-frame differences. The legacy path may not detect floating-keyboard height accurately. Detachment clears the observer and bottom inset.
 
-## setTouchSoundLevel · getTouchSoundLevel
+## setTouchSoundLevel, getTouchSoundLevel
 
 ```text
 public final void setTouchSoundLevel(int level);
@@ -71,7 +71,7 @@ public final int getTouchSoundLevel();
 
 0=off, 1=soft, 2=loud. Out-of-range values throw `IllegalArgumentException`. Sound plays only for handled DOWN events. Attachment creates the player; off or detachment releases it.
 
-## onViewportBoundsChanged · lifecycle · drawing · touch
+## onViewportBoundsChanged, lifecycle, drawing, touch
 
 ```text
 public boolean dispatchTouchEvent(MotionEvent event);

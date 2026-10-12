@@ -4,7 +4,7 @@ slug: ko/api/wmcomboglyph
 ---
 [API](/ko/api/)
 
-선택 필드의 화살표·팝업 연결·키 전달을 관리하는 package-private 구현입니다.
+선택 필드의 화살표, 팝업 연결, 키 전달을 관리하는 package-private 구현입니다.
 
 `sdk/src/main/java/me/ancal/wmdroid/sdk/WmComboGlyph.java`
 

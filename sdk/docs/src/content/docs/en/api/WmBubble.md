@@ -28,7 +28,7 @@ Set bounds before drawing. The shape is translated to the bounds' left/top coord
 
 The tail base is `52` wide and extends right when `anchor < width/4`, or left otherwise. `width/4` uses integer division. Only the base position is adjusted; the tip is not clamped. To prevent a tail outside the bounds, choose an appropriate `anchor` or clip the Canvas. Body, tail, and header share one contour, with no separate stroke at their junction. A normal return restores the previous Canvas state.
 
-## setAlpha · setColorFilter
+## setAlpha, setColorFilter
 
 ```java
 public void setAlpha(int alpha);

@@ -8,7 +8,7 @@ slug: ko/api/wmappointmentreminder
 public final class WmAppointmentReminder extends LinearLayout implements WmControls.LanguageListener
 ```
 
-약속의 상대 알림 사용 콤보와 수량·단위를 표시한다. 비활성 알림은 숫자 줄을 숨긴다. 소유자가 각 필드의 팝업을 제공한다.
+약속의 상대 알림 사용 콤보와 수량, 단위를 표시한다. 비활성 알림은 숫자 줄을 숨긴다. 소유자가 각 필드의 팝업을 제공한다.
 
 ### 생성자
 
@@ -16,7 +16,7 @@ public final class WmAppointmentReminder extends LinearLayout implements WmContr
 public WmAppointmentReminder(Context context,Typeface font,Locale locale,WmReminder initial,int selection);
 ```
 
-font/locale/initial은 null 불가(`IllegalArgumentException`). initial의 enabled·quantity·unit으로 각 필드를 초기화합니다. selection은 단위 인덱스가 아닌 Android 선택 강조색 int입니다. 수량은 ASCII 숫자 최대4자리이며 단위 변경은 수량을 유지합니다.
+font/locale/initial은 null 불가(`IllegalArgumentException`). initial의 enabled, quantity, unit으로 각 필드를 초기화합니다. selection은 단위 인덱스가 아닌 Android 선택 강조색 int입니다. 수량은 ASCII 숫자 최대4자리이며 단위 변경은 수량을 유지합니다.
 
 ### value
 
@@ -32,7 +32,7 @@ public WmReminder value();
 public Bundle saveInteractionState();
 ```
 
-schema1 Bundle로 commit fallback·숫자 원문·후보·편집 상호작용을 보존한다. blur commit을 수행하지 않는다.
+schema1 Bundle로 commit fallback, 숫자 원문, 후보, 편집 상호작용을 보존한다. blur commit을 수행하지 않는다.
 
 ### validateInteractionState
 
@@ -40,7 +40,7 @@ schema1 Bundle로 commit fallback·숫자 원문·후보·편집 상호작용을
 public static void validateInteractionState(Bundle state);
 ```
 
-완전한 schema1 snapshot을 검증한다. draft는 빈 값 또는 ASCII 1..4자리 숫자이다. 잘못된 스키마·값·후보·편집 상태는 `IllegalArgumentException`.
+완전한 schema1 snapshot을 검증한다. draft는 빈 값 또는 ASCII 1..4자리 숫자이다. 잘못된 스키마, 값, 후보, 편집 상태는 `IllegalArgumentException`.
 
 ### restoreInteractionState
 
@@ -96,7 +96,7 @@ public void setEditingEnabled(boolean enabled);
 public void setLocale(Locale locale);
 ```
 
-사용/단위 문구만 새 catalog로 바꾼다. 수량·선택은 유지한다. null은 `IllegalArgumentException`.
+사용/단위 문구만 새 catalog로 바꾼다. 수량, 선택은 유지한다. null은 `IllegalArgumentException`.
 
 ### onWmLanguageChanged
 
@@ -104,6 +104,6 @@ public void setLocale(Locale locale);
 public void onWmLanguageChanged(String language);
 ```
 
-공유 catalog 언어의 Locale을 setLocale에 전달하여 알림 사용·단위 문구를 바꾼다. 수량과 선택은 유지한다.
+공유 catalog 언어의 Locale을 setLocale에 전달하여 알림 사용, 단위 문구를 바꾼다. 수량과 선택은 유지한다.
 
 소스: `sdk/src/main/java/me/ancal/wmdroid/sdk/WmAppointmentReminder.java`

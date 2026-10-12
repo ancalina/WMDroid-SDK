@@ -26,7 +26,7 @@ public interface OnValueChangedListener
 void changed(String value);
 ```
 
-## Constructor · value · setValue · choose
+## Constructor, value, setValue, choose
 
 ```text
 public String value();
@@ -39,7 +39,7 @@ public void setOnValueChangedListener(OnValueChangedListener listener);
 
 Null candidate arrays, labels, or value throw `IllegalArgumentException`. Empty candidate arrays are allowed. candidates() returns a copy. setValue is silent. Direct editing reports actual string changes while enabled. choose requires a valid index or throws `IndexOutOfBoundsException`. When enabled, it applies the candidate and calls the listener only for a string change. An identical string still updates the candidate index. Operations and callbacks use the main thread.
 
-## setCandidates · setCandidateSort · addCandidate · insertCandidate · removeCandidate · clearCandidates
+## setCandidates, setCandidateSort, addCandidate, insertCandidate, removeCandidate, clearCandidates
 
 ```text
 public String[] candidates();
@@ -55,7 +55,7 @@ setCandidates copies the array and resets the candidate selection index to -1 an
 
 removeCandidate returns the remaining count. Deleting the selected candidate from a longer list clears the caption; deleting the last candidate preserves literal text. clearCandidates clears both candidates and caption. Mutations are silent. Invalid indices throw `IndexOutOfBoundsException`. Close captured, reordered, or non-keyboard popups before mutation. A mismatched bound list throws `IllegalStateException`. Bound callbacks must resolve current source indices.
 
-## open · bindDropdown · isDroppedDown
+## open, bindDropdown, isDroppedDown
 
 ```text
 public void bindDropdown(View popup);
@@ -91,7 +91,7 @@ popupLayer.addView(popup, new FrameLayout.LayoutParams(
         menu.menuWidth(), menu.menuHeight()));
 ```
 
-## setExtendedUi · isExtendedUi · keyboard
+## setExtendedUi, isExtendedUi, keyboard
 
 ```text
 public void setExtendedUi(boolean enabled);
@@ -106,7 +106,7 @@ public int getClosedDropdownClientHeight();
 
 setOnCandidateNavigationListener delegates closed candidate commits to the owner; absent listeners use choose. setExtendedUi(true) opens on closed Up/Down and ignores Page and F4. Default Up/Down navigates candidates. Closed Page navigation requires setClosedDropdownClientHeight. Height excludes frame and caption and uses logical pixels. -1 delegates to the editor; 0 is valid; values below -1 throw `IllegalArgumentException`. Open Enter/Escape closes while retaining the last commit. getClosedDropdownClientHeight returns the configured value; the default is -1.
 
-## saveInteractionState · validateInteractionState · restoreInteractionState
+## saveInteractionState, validateInteractionState, restoreInteractionState
 
 ```text
 public Bundle saveInteractionState();
@@ -116,7 +116,7 @@ public static void validateInteractionState(Bundle state,int candidateCount,int 
 
 schema=1 stores candidate count, selected index, caret, and text selection. Restore owner candidates and literal draft first. Validation checks schema, count, and ranges; failure throws `IllegalArgumentException`. Restore is silent and throws `IllegalStateException` if the popup is open. Popup, gesture, and extendedUi policies are absent from the snapshot.
 
-## setEnabled · onWmRestyle · lifecycle
+## setEnabled, onWmRestyle, lifecycle
 
 ```text
 protected void onMeasure(int widthSpec,int heightSpec);

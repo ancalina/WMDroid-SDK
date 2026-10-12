@@ -17,7 +17,7 @@ public static final int NAME=0,ADDRESS=1;
 public WmContactSubcardView(Context context,Typeface regular,int kind,String[] labels,String[] values,int selection)
 ```
 
-`NAME`은 정확히 6개, `ADDRESS`는 5개 레이블/값 필요. 배열을 복사한다. null 글꼴, 다른 kind, 배열 길이 불일치, null 배열/문자열은 `IllegalArgumentException`. 주소의 0·4번 필드는 여러 줄 입력; 나머지는 한 줄.
+`NAME`은 정확히 6개, `ADDRESS`는 5개 레이블/값 필요. 배열을 복사한다. null 글꼴, 다른 kind, 배열 길이 불일치, null 배열/문자열은 `IllegalArgumentException`. 주소의 0, 4번 필드는 여러 줄 입력; 나머지는 한 줄.
 
 ## Draft
 
@@ -49,6 +49,6 @@ protected void dispatchDraw(Canvas canvas)
 public void onWmRestyle(Typeface regular,Typeface bold,int selection,int tabColor)
 ```
 
-`desiredHeight`는 NAME 248, ADDRESS 328 논리 픽셀. 기본 폭 350; 측정 제약에 맞춰 폭 조절. 레이아웃은 순서대로 필드를 배치하며 2픽셀 테두리를 마지막에 그린다. 재스타일은 regular·선택 색을 갱신하고 null regular를 거부한다.
+`desiredHeight`는 NAME 248, ADDRESS 328 논리 픽셀. 기본 폭 350; 측정 제약에 맞춰 폭 조절. 레이아웃은 순서대로 필드를 배치하며 2픽셀 테두리를 마지막에 그린다. 재스타일은 regular, 선택 색을 갱신하고 null regular를 거부한다.
 
 소스: `sdk/src/main/java/me/ancal/wmdroid/sdk/WmContactSubcardView.java`

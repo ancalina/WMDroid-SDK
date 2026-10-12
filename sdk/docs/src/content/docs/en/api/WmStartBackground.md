@@ -28,7 +28,7 @@ Fills current bounds with texture repeated in both directions. The Bitmap is not
 
 Draws a black border with width `2` logical pixels and its centerline `1` pixel inside each bound. The caller sets bounds.
 
-## setAlpha · setColorFilter
+## setAlpha, setColorFilter
 
 ```java
 public void setAlpha(int alpha);

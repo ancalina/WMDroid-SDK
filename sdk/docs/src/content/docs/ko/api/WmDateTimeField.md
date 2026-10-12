@@ -8,9 +8,9 @@ slug: ko/api/wmdatetimefield
 public final class WmDateTimeField extends FrameLayout implements WmControls.RestyleListener
 ```
 
-날짜 분할 필드와 편집 가능한 시각 콤보를 결합한다. civil 값이며 시간대나 epoch를 포함하지 않는다. 팝업 배치·저장은 호출자가 담당한다. View 변경과 콜백은 UI 스레드에서 사용한다.
+날짜 분할 필드와 편집 가능한 시각 콤보를 결합한다. civil 값이며 시간대나 epoch를 포함하지 않는다. 팝업 배치, 저장은 호출자가 담당한다. View 변경과 콜백은 UI 스레드에서 사용한다.
 
-공개 생성자는 1900..2999를 사용한다. `WmTaskEditor.reminderField()`가 반환한 컨트롤은 1752-09-14..9999-12-31, 필수 날짜, 작업 카드 외형을 사용한다. 값 설정·상호작용 상태 검증에도 이 범위를 적용한다.
+공개 생성자는 1900..2999를 사용한다. `WmTaskEditor.reminderField()`가 반환한 컨트롤은 1752-09-14..9999-12-31, 필수 날짜, 작업 카드 외형을 사용한다. 값 설정, 상호작용 상태 검증에도 이 범위를 적용한다.
 
 ### 생성자
 
@@ -34,7 +34,7 @@ public WmDateField dateChoice();
 public WmEditableChoice timeChoice();
 ```
 
-소유된 `WmEditableChoice`를 반환한다. 별도 부모에 다시 붙이지 않는다. 자식의 value-change listener는 시각 파싱과 마지막 유효 값·통지 값을 동기화한다. 이 listener나 open listener를 교체하지 않는다. 팝업은 `setOnTimeOpen`, 값 관찰은 composite의 `setOnValueChangedListener`에 연결한다. 미완성 시각 문자열은 초안으로 유지한다.
+소유된 `WmEditableChoice`를 반환한다. 별도 부모에 다시 붙이지 않는다. 자식의 value-change listener는 시각 파싱과 마지막 유효 값, 통지 값을 동기화한다. 이 listener나 open listener를 교체하지 않는다. 팝업은 `setOnTimeOpen`, 값 관찰은 composite의 `setOnValueChangedListener`에 연결한다. 미완성 시각 문자열은 초안으로 유지한다.
 
 ### dateValue
 
@@ -98,7 +98,7 @@ public void setOnTimeOpen(OnTimeOpen listener);
 public void setOnValueChangedListener(OnValueChangedListener listener);
 ```
 
-유효하고 이전 통지 값과 다른 사용자 변경만 `(oldValue,newValue)`로 통지한다. 프로그램 값 교체·복원은 조용하다. null로 해제한다.
+유효하고 이전 통지 값과 다른 사용자 변경만 `(oldValue,newValue)`로 통지한다. 프로그램 값 교체, 복원은 조용하다. null로 해제한다.
 
 ### setTimeOrigin
 
@@ -122,7 +122,7 @@ public void setLocale(Locale locale);
 public Bundle saveInteractionState();
 ```
 
-날짜·유효 시각·원문 시각·후보·캐럿·초점·parser·origin의 schema1 Bundle을 반환한다. 팝업·IME 조합·테마·사용 정책은 포함하지 않는다.
+날짜, 유효 시각, 원문 시각, 후보, 캐럿, 초점, parser, origin의 schema1 Bundle을 반환한다. 팝업, IME 조합, 테마, 사용 정책은 포함하지 않는다.
 
 ### validateInteractionState
 
@@ -130,7 +130,7 @@ public Bundle saveInteractionState();
 public void validateInteractionState(Bundle state);
 ```
 
-현재 날짜 형식/범위와 전체 schema1 snapshot을 변경 전에 검증한다. 잘못된 타입·스키마·후보·parser·origin·초점은 `IllegalArgumentException`.
+현재 날짜 형식/범위와 전체 schema1 snapshot을 변경 전에 검증한다. 잘못된 타입, 스키마, 후보, parser, origin, 초점은 `IllegalArgumentException`.
 
 ### restoreInteractionState
 
@@ -138,7 +138,7 @@ public void validateInteractionState(Bundle state);
 public void restoreInteractionState(Bundle state);
 ```
 
-검증 후 조용히 값·초안·상호작용을 교체한다. 날짜/시각 팝업을 먼저 닫는다. 열린 팝업 또는 재진입은 `IllegalStateException`; 잘못된 snapshot은 `IllegalArgumentException`이고 상태를 교체하지 않는다.
+검증 후 조용히 값, 초안, 상호작용을 교체한다. 날짜/시각 팝업을 먼저 닫는다. 열린 팝업 또는 재진입은 `IllegalStateException`; 잘못된 snapshot은 `IllegalArgumentException`이고 상태를 교체하지 않는다.
 
 ### setEnabled
 
@@ -162,7 +162,7 @@ public void onWmRestyle(Typeface regular,Typeface bold,int selection,int tabColo
 protected void onMeasure(int widthSpec,int heightSpec);
 ```
 
-Android 측정·배치·그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
+Android 측정, 배치, 그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
 
 ### onLayout
 
@@ -170,7 +170,7 @@ Android 측정·배치·그리기 hook. 논리 좌표와 현재 글꼴 지표로
 protected void onLayout(boolean changed,int left,int top,int right,int bottom);
 ```
 
-Android 측정·배치·그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
+Android 측정, 배치, 그리기 hook. 논리 좌표와 현재 글꼴 지표로 control geometry 및 선택 표시를 갱신한다. 직접 호출하지 않는다.
 
 ## Value
 

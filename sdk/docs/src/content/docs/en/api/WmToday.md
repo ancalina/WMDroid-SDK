@@ -37,7 +37,7 @@ size must be 1–480. inset, left, and right must be nonnegative; left+right mus
 
 lineHeight is `max(1,round(TODAY_LINE*size/TODAY_FONT))`. For one line or less, height is `max(TODAY_MIN,lineHeight)`. Otherwise it is `lines*lineHeight+(lines-1)*GAP+2*inset`.
 
-## Style · Divider · Module
+## Style, Divider, Module
 
 ```java
 public static final class Style
@@ -122,7 +122,7 @@ arrange uses preferredOrder, then appends remaining modules in registration orde
 
 An attachment failure can leave a partially rebuilt layout; there is no rollback. Do not share one content View between registered IDs or attach unrelated children to this Layout.
 
-## Row constructor · caption · setCaption · setCaptionLines
+## Row constructor, caption, setCaption, setCaptionLines
 
 ```java
 public static final class Row extends FrameLayout
@@ -146,7 +146,7 @@ Both setters remove existing appointment blocks, show caption, and clear the row
 
 setCaption wraps with StaticLayout. setCaptionLines counts LF line breaks and clips horizontal overflow without wrapping or ellipsis. One line is vertically centered; multiple lines use TOP with inset padding. Caption line spacing targets lineHeight()+GAP. With STANDARD, one/two/three lines produce row heights 40/74/104.
 
-## Appointment · Row.setAppointments
+## Appointment, Row.setAppointments
 
 ```java
 public static final class Appointment
@@ -165,7 +165,7 @@ Subjects wrap within 480−left−right and occupy at least one line. Nonempty d
 
 The row height is max(TODAY_MIN, 2×inset + all subject/detail heights + inter-appointment gaps). caption becomes GONE but stores the full joined text. The row contentDescription stores that same full text. New blocks use the constructor font and current caption colors.
 
-## CalendarEntry · selectAppointments
+## CalendarEntry, selectAppointments
 
 ```java
 public static final class CalendarEntry

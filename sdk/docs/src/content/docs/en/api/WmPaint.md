@@ -30,7 +30,7 @@ public int scale = 1000;
 public enum Role { MENU, POPUP, FORM, GRID, CALENDAR }
 ```
 
-## Constructor · readOptions
+## Constructor, readOptions
 
 ```text
 public WmPaint(Context context,boolean delayAlreadyServed);
@@ -40,7 +40,7 @@ protected Options readOptions();
 
 Create and change the container on the UI thread. The default role is `FORM`. Do not pass a null role. `delayAlreadyServed` skips the initial wait on attachment. `readOptions()` reads the current `WmShell.State`. Subclasses can override this hook to supply Options.
 
-## Options · Role
+## Options, Role
 
 ```text
 public static Options from(WmShell.State state);
@@ -61,7 +61,7 @@ public void replay(View client,boolean delayServed);
 
 Calls without a client reveal the complete area. `delayServed=true` skips the initial delay. A client must be a descendant of this container. Null, the container itself, or an outside View throws `IllegalArgumentException`. Only the client area is revealed; the surrounding area remains visible. A detached or hidden container does not start. The effect waits for layout and uses the clipped area. Disabled effects do not delay display.
 
-## isActive · cancel · stopReplay
+## isActive, cancel, stopReplay
 
 ```text
 public boolean isActive();
@@ -71,7 +71,7 @@ public void cancel();
 
 `isActive()` reports an active effect. `cancel()` removes scheduled callbacks, clipping, and gesture blocking. `stopReplay(root)` completes active effects in root and its descendants. It still blocks an existing touch until UP or CANCEL.
 
-## Lifecycle · drawing · touch
+## Lifecycle, drawing, touch
 
 ```text
 protected void onAttachedToWindow();
